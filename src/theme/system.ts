@@ -24,6 +24,17 @@ const config = defineConfig({
           300: { value: '#A9B8F0' },
           200: { value: '#CBD5F7' },
         },
+        syntax: {
+          property: { value: '#7DD3FC' },
+          string: { value: '#B9FC01' },
+          number: { value: '#FDBA74' },
+          atom: { value: '#F9A8D4' },
+          keyword: { value: '#C4B5FD' },
+          attribute: { value: '#FDE68A' },
+          comment: { value: '#A9B8F0' },
+          punctuation: { value: '#CBD5F7' },
+          invalid: { value: '#FCA5A5' },
+        },
       },
       fonts: {
         heading: { value: 'var(--font-geist-sans), system-ui, sans-serif' },
