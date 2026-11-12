@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Permanent_Marker } from 'next/font/google';
 import { Box, SkipNavContent, SkipNavLink } from '@chakra-ui/react';
 
 import { AppHeader } from '@/components/navigation/AppHeader';
@@ -12,6 +12,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
+
+const brandFont = Permanent_Marker({
+  variable: '--font-brand',
+  weight: '400',
   subsets: ['latin'],
 });
 
@@ -28,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable}`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${brandFont.variable}`}
       style={{ colorScheme: 'dark' }}
       suppressHydrationWarning
     >

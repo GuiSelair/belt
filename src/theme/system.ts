@@ -40,6 +40,13 @@ const config = defineConfig({
         heading: { value: 'var(--font-geist-sans), system-ui, sans-serif' },
         body: { value: 'var(--font-geist-sans), system-ui, sans-serif' },
         mono: { value: 'var(--font-geist-mono), ui-monospace, monospace' },
+        brand: { value: 'var(--font-brand), cursive' },
+      },
+    },
+    keyframes: {
+      draw: {
+        from: { strokeDashoffset: '1' },
+        to: { strokeDashoffset: '0' },
       },
     },
     semanticTokens: {
