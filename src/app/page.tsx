@@ -1,5 +1,5 @@
-import { Heading } from '@chakra-ui/react';
+import { HomeHero } from '@/components/home/HomeHero';
 
 export default function HomePage() {
-  return <Heading as="h1">Kanivete</Heading>;
+  return <HomeHero />;
 }
