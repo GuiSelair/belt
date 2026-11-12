@@ -22,7 +22,7 @@ describe('HomeHero', () => {
       'href',
       '/beautify/json',
     );
-    expect(screen.getByRole('link', { name: /XML → XSD/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /XML to XSD/ })).toHaveAttribute(
       'href',
       '/transformations/xml-to-xsd',
     );

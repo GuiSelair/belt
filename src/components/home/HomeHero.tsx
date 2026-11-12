@@ -13,6 +13,9 @@ import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 import { getTool } from '@/registry';
 
+import { HeroArtifacts } from './HeroArtifacts';
+import { ScribbleCircle } from './ScribbleCircle';
+
 export function HomeHero() {
   const jsonBeautify = getTool('json-beautify');
   const xmlToXsd = getTool('xml-to-xsd');
@@ -26,10 +29,11 @@ export function HomeHero() {
       minH="calc(100dvh - 4rem)"
       py="16"
       bg="bg.brand"
-      bgImage="radial-gradient(ellipse at top, {colors.brand.blue} 0%, {colors.navy.900} 70%)"
+      overflow="hidden"
     >
-      <Container maxW="3xl" textAlign="center">
-        <Stack gap="8" align="center">
+      <Container maxW="4xl" textAlign="center" position="relative" py="12">
+        <HeroArtifacts />
+        <Stack gap="8" align="center" position="relative">
           <Badge
             size="lg"
             variant="outline"
@@ -44,18 +48,21 @@ export function HomeHero() {
           <Heading
             as="h1"
             id="home-title"
-            fontSize={{ base: '5xl', md: '7xl' }}
-            fontWeight="black"
-            letterSpacing="tighter"
-            lineHeight="1"
+            fontFamily="brand"
+            fontWeight="normal"
+            fontSize={{ base: '6xl', md: '8xl' }}
+            lineHeight="1.1"
+            transform="rotate(-3deg)"
           >
             Kanivete
           </Heading>
           <Text fontSize={{ base: 'lg', md: '2xl' }} color="fg" maxW="2xl">
             The{' '}
-            <Text as="strong" color="fg.highlight" fontWeight="bold">
-              Swiss army knife
-            </Text>{' '}
+            <ScribbleCircle>
+              <Text as="strong" color="fg.highlight" fontWeight="bold">
+                Swiss army knife
+              </Text>
+            </ScribbleCircle>{' '}
             for developers — beautify, validate and transform data right in your
             browser.
           </Text>
