@@ -52,7 +52,7 @@ export function useLatestTask<Input, Result>(
   }, [task, input]);
 
   return {
-    outcome: settled?.outcome ?? null,
+    outcome: input === null ? null : (settled?.outcome ?? null),
     isPending: input !== null && settled?.input !== input,
   };
 }

@@ -49,6 +49,19 @@ describe('useLatestTask', () => {
     expect(result.current.outcome).toEqual({ ok: true, result: 'a' });
   });
 
+  it('has no outcome when the input is cleared', async () => {
+    const echo = (value: string) => Promise.resolve(value);
+    const { result, rerender } = renderHook(
+      ({ input }: { input: string | null }) => useLatestTask(echo, input),
+      { initialProps: { input: 'a' as string | null } },
+    );
+    await waitFor(() => expect(result.current.outcome).not.toBeNull());
+
+    rerender({ input: null });
+
+    expect(result.current).toEqual({ outcome: null, isPending: false });
+  });
+
   it('reports task failures as error outcomes', async () => {
     const fail = () => Promise.reject(new Error('nope'));
     const { result } = renderHook(() => useLatestTask(fail, 'x'));

@@ -1,13 +1,12 @@
-import { Text } from '@chakra-ui/react';
-
 import { ToolPage, buildToolMetadata } from '@/components/tool/ToolPage';
+import { JsonBeautifyScreen } from '@/features/json/beautify/JsonBeautifyScreen';
 
 export const metadata = buildToolMetadata('json-beautify');
 
 export default function JsonBeautifyPage() {
   return (
     <ToolPage toolId="json-beautify">
-      <Text>Under construction.</Text>
+      <JsonBeautifyScreen />
     </ToolPage>
   );
 }
