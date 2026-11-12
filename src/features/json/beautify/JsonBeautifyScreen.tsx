@@ -14,9 +14,9 @@ import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
 import { ToolToolbar } from '@/components/tool/ToolToolbar';
+import { indentOptions } from '@/lib/indentation';
 
 import {
-  indentOptions,
   outputModeOptions,
   useJsonBeautifyScreen,
 } from './useJsonBeautifyScreen';

@@ -4,6 +4,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import type { SelectOption } from '@/components/form/SelectField';
+import { toIndentUnit, type IndentOption } from '@/lib/indentation';
 import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
@@ -19,20 +20,7 @@ import {
 } from '../lib/formatJson';
 import { JSON_SAMPLE, isLargeJson, toDiagnostic } from '../jsonShared';
 
-type IndentOption = '2' | '4' | 'tab';
 type OutputMode = 'beautify' | 'minify';
-
-const INDENTS: Record<IndentOption, string> = {
-  '2': '  ',
-  '4': '    ',
-  tab: '\t',
-};
-
-export const indentOptions: SelectOption<IndentOption>[] = [
-  { value: '2', label: '2 spaces' },
-  { value: '4', label: '4 spaces' },
-  { value: 'tab', label: 'Tab' },
-];
 
 export const outputModeOptions: SelectOption<OutputMode>[] = [
   { value: 'beautify', label: 'Beautify' },
@@ -62,7 +50,7 @@ export function useJsonBeautifyScreen() {
     if (input.trim() === '' || debouncedInput.trim() === '') return null;
     return {
       text: debouncedInput,
-      indent: mode === 'minify' ? '' : INDENTS[indent],
+      indent: mode === 'minify' ? '' : toIndentUnit(indent),
       sortKeys,
     };
   }, [input, debouncedInput, mode, indent, sortKeys]);
