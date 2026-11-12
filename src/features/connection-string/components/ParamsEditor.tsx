@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useId } from 'react';
 
 import {
   Badge,
@@ -153,6 +153,8 @@ export function ParamsEditor({
   onChange,
   onRemove,
 }: ParamsEditorProps) {
+  const suggestionsLabelId = useId();
+
   return (
     <Stack gap="4">
       {params.length > 0 && (
@@ -179,10 +181,19 @@ export function ParamsEditor({
       </Button>
       {availableSuggestions.length > 0 && (
         <Stack gap="2">
-          <Text as="h3" fontSize="sm" fontWeight="semibold" color="fg.muted">
+          <Text
+            id={suggestionsLabelId}
+            fontSize="sm"
+            fontWeight="semibold"
+            color="fg.muted"
+          >
             Suggested parameters
           </Text>
-          <List.Root variant="plain" gap="3">
+          <List.Root
+            variant="plain"
+            gap="3"
+            aria-labelledby={suggestionsLabelId}
+          >
             {availableSuggestions.map((suggestion) => (
               <SuggestionItem
                 key={suggestion.key}
