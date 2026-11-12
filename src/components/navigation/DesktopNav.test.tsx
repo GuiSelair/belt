@@ -7,7 +7,8 @@ import { renderWithProviders } from '@/test/renderWithProviders';
 
 import { DesktopNav } from './DesktopNav';
 
-vi.mock('next/navigation', () => ({
+vi.mock('next/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('next/navigation')>()),
   usePathname: () => '/beautify/json',
 }));
 
