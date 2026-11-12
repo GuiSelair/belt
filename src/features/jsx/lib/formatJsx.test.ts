@@ -69,3 +69,34 @@ describe('formatJsx', () => {
     expect(await format('   ')).toBe('');
   });
 });
+
+describe('formatJsx parity with the Prettier Node API', () => {
+  const fixtures = [
+    {
+      code: 'export function List({items}){return <ul>{items.map(i=><li key={i.id} className="item">{i.label}</li>)}</ul>}',
+      overrides: {},
+    },
+    {
+      code: 'const Form = () => { const [v,setV]=useState("") ; return <form onSubmit={e=>{e.preventDefault()}}><input value={v} onChange={e=>setV(e.target.value)} aria-label="Name"/></form> }',
+      overrides: { singleQuote: true, semi: false, printWidth: 60 },
+    },
+    {
+      code: 'type P={title:string;children?:React.ReactNode}\nexport const Card=({title,children}:P)=><section><h2>{title}</h2>{children}</section>',
+      overrides: { typescript: true, bracketSameLine: true, useTabs: true },
+    },
+  ];
+
+  it.each(fixtures)('matches prettier.format for %#', async (fixture) => {
+    const { format: nodeFormat } = await import('prettier');
+    const { typescript = false, ...options } = {
+      ...defaultJsxFormatOptions,
+      ...fixture.overrides,
+    };
+    const expected = await nodeFormat(fixture.code, {
+      ...options,
+      parser: typescript ? 'typescript' : 'babel',
+    });
+
+    expect(await format(fixture.code, fixture.overrides)).toBe(expected);
+  });
+});
