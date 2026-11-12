@@ -31,13 +31,15 @@ export interface ExternalLink {
   description: string;
 }
 
-export interface NavItem {
+interface NavItemBase {
   id: string;
   label: string;
   description: string;
-  href: string;
-  external: boolean;
 }
+
+export type NavItem =
+  | (NavItemBase & { external: false; href: Route })
+  | (NavItemBase & { external: true; href: string });
 
 export interface NavSection {
   id: string;

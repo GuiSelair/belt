@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Box, SkipNavContent, SkipNavLink } from '@chakra-ui/react';
 
+import { AppHeader } from '@/components/navigation/AppHeader';
 import { AppProviders } from '@/components/providers/AppProviders';
 
 const geistSans = Geist({
@@ -31,7 +33,14 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       suppressHydrationWarning
     >
       <body>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <SkipNavLink>Skip to content</SkipNavLink>
+          <AppHeader />
+          <SkipNavContent />
+          <Box as="main" minH="calc(100dvh - 4rem)">
+            {children}
+          </Box>
+        </AppProviders>
       </body>
     </html>
   );
