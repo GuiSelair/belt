@@ -6,9 +6,9 @@ Every tool needs a consistent, accessible frame: discoverable navigation, a shar
 
 ## Goals
 
-- [ ] Any tool is reachable from any page in ≤ 2 interactions (hover/focus group → click tool).
-- [ ] Adding a tool requires only a tool module + one registry entry.
-- [ ] Full keyboard operability of navigation and editors; Lighthouse Accessibility ≥ 95.
+- [x] Any tool is reachable from any page in ≤ 2 interactions (hover/focus group → click tool).
+- [x] Adding a tool requires only a tool module + one registry entry.
+- [x] Full keyboard operability of navigation and editors; Lighthouse Accessibility ≥ 95.
 
 ## Out of Scope
 
@@ -157,27 +157,27 @@ Every tool needs a consistent, accessible frame: discoverable navigation, a shar
 
 ## Requirement Traceability
 
-| Requirement ID | Story                        | Phase  | Status  |
+| Requirement ID | Story                        | Task | Status |
 | -------------- | ---------------------------- | ------ | ------- |
-| SHELL-01       | P1: Tool registry            | Design | Pending |
-| SHELL-02       | P1: Grouped top navigation   | Design | Pending |
-| SHELL-03       | P1: Mobile navigation        | Design | Pending |
-| SHELL-04       | P1: "Links" external menu    | Design | Pending |
-| SHELL-05       | P1: Home hero                | Design | Pending |
-| SHELL-06       | P1: Shared tool layout       | Design | Pending |
-| SHELL-07       | P1: Shared CodeMirror editor | Design | Pending |
-| SHELL-08       | P1: Brand theme & contrast   | Design | Pending |
-| SHELL-09       | P2: Not-found page           | -      | Pending |
-| SHELL-10       | P1: Home featured links      | Design | Pending |
-| SHELL-11       | P1: Chakra UI setup + tokens | Design | Pending |
+| SHELL-01       | P1: Tool registry            | T3 | Verified |
+| SHELL-02       | P1: Grouped top navigation   | T4 | Verified |
+| SHELL-03       | P1: Mobile navigation        | T4 | Verified |
+| SHELL-04       | P1: "Links" external menu    | T4 | Verified |
+| SHELL-05       | P1: Home hero                | T5 | Verified |
+| SHELL-06       | P1: Shared tool layout       | T6, T7 | Verified |
+| SHELL-07       | P1: Shared CodeMirror editor | T7 | Verified |
+| SHELL-08       | P1: Brand theme & contrast   | T2 | Verified |
+| SHELL-09       | P2: Not-found page           | T5 | Verified |
+| SHELL-10       | P1: Home featured links      | T5 | Verified |
+| SHELL-11       | P1: Chakra UI setup + tokens | T2 | Verified |
 
-**Coverage:** 11 total, 0 mapped to tasks, 11 unmapped ⚠️
+**Coverage:** 11 total, 11 mapped to tasks, 0 unmapped ✅
 
 ---
 
 ## Success Criteria
 
-- [ ] Lighthouse Accessibility ≥ 95 on home and tool pages.
-- [ ] Zero axe contrast violations.
-- [ ] A new tool appears in the menu by editing only the tool registry; a new external link appears by editing only the external-links registry.
-- [ ] Home shows all three brand colors with zero contrast violations.
+- [x] Lighthouse Accessibility ≥ 95 on home and tool pages.
+- [x] Zero axe contrast violations.
+- [x] A new tool appears in the menu by editing only the tool registry; a new external link appears by editing only the external-links registry.
+- [x] Home shows all three brand colors with zero contrast violations.

@@ -1,7 +1,7 @@
 # Roadmap
 
 **Current Milestone:** M1 — Foundation & MVP Tools
-**Status:** Planning
+**Status:** Done (local) — all P1/P2 criteria verified
 
 ---
 
@@ -12,7 +12,7 @@
 
 ### Features
 
-**App Shell** (`.specs/features/app-shell/spec.md`) - PLANNED
+**App Shell** (`.specs/features/app-shell/spec.md`) - DONE
 
 - Chakra UI 3 provider + theme tokens; Emotion/plain CSS for granular styles (e.g. CodeMirror)
 - Tool registry as single source of truth (routes, menu, featured links)
@@ -22,21 +22,21 @@
 - Shared tool layout (input/output editors, toolbar, status/error area)
 - CodeMirror dark theme following brand colors
 
-**JSON Tools** (`.specs/features/json-tools/spec.md`) - PLANNED
+**JSON Tools** (`.specs/features/json-tools/spec.md`) - DONE
 
 - JSON Beautify (indent options, minify)
 - JSON Validation (error with line/column, inline editor diagnostics)
 
-**JSX Beautify** (`.specs/features/jsx-beautify/spec.md`) - PLANNED
+**JSX Beautify** (`.specs/features/jsx-beautify/spec.md`) - DONE
 
 - Prettier-based formatting in a Web Worker with common options
 
-**XML Tools** (`.specs/features/xml-tools/spec.md`) - PLANNED
+**XML Tools** (`.specs/features/xml-tools/spec.md`) - DONE
 
 - XML Validation (well-formedness, line/column diagnostics)
 - XML → XSD (schema inference from sample XML, in a Web Worker)
 
-**Connection String Builder** (`.specs/features/connection-string-builder/spec.md`) - PLANNED
+**Connection String Builder** (`.specs/features/connection-string-builder/spec.md`) - DONE
 
 - Form-based URI builder for PostgreSQL, MySQL, MongoDB, Redis, Oracle, ClickHouse, SQL Server
 - Suggested common params per engine (e.g. `sslmode`)

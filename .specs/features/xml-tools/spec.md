@@ -8,8 +8,8 @@ Integrations (SOAP, NF-e, legacy systems, config files) still rely on XML. Devel
 
 ## Goals
 
-- [ ] Validation errors report line/column for 100% of malformed fixtures.
-- [ ] Generated XSD is itself valid XML Schema and validates the source XML.
+- [x] Validation errors report line/column for 100% of malformed fixtures.
+- [x] Generated XSD is itself valid XML Schema and validates the source XML.
 
 ## Out of Scope
 
@@ -88,25 +88,25 @@ Integrations (SOAP, NF-e, legacy systems, config files) still rely on XML. Devel
 
 ## Requirement Traceability
 
-| Requirement ID | Story                              | Phase  | Status  |
+| Requirement ID | Story                              | Task | Status |
 | -------------- | ---------------------------------- | ------ | ------- |
-| XML-01         | P1: Well-formedness + summary      | Design | Pending |
-| XML-02         | P1: Error line/col + lint          | Design | Pending |
-| XML-03         | P1: XML beautify                   | Design | Pending |
-| XSD-01         | P1: XSD generation in worker       | Design | Pending |
-| XSD-02         | P1: Occurrence inference           | Design | Pending |
-| XSD-03         | P1: Type inference                 | Design | Pending |
-| XSD-04         | P1: Attributes / simpleContent     | Design | Pending |
-| XSD-05         | P1: Russian doll / Salami slice    | Design | Pending |
-| XSD-06         | P1: Default namespace handling     | Design | Pending |
-| XSD-07         | P1: Download .xsd                  | Design | Pending |
-| XSD-08         | P2: sequence vs all                | -      | Pending |
+| XML-01         | P1: Well-formedness + summary      | T11 | Verified |
+| XML-02         | P1: Error line/col + lint          | T11 | Verified |
+| XML-03         | P1: XML beautify                   | T11 | Verified |
+| XSD-01         | P1: XSD generation in worker       | T12 | Verified |
+| XSD-02         | P1: Occurrence inference           | T12 | Verified |
+| XSD-03         | P1: Type inference                 | T12 | Verified |
+| XSD-04         | P1: Attributes / simpleContent     | T12 | Verified |
+| XSD-05         | P1: Russian doll / Salami slice    | T12 | Verified |
+| XSD-06         | P1: Default namespace handling     | T12 | Verified |
+| XSD-07         | P1: Download .xsd                  | T12 | Verified |
+| XSD-08         | P2: sequence vs all                | T12 | Verified |
 
-**Coverage:** 11 total, 0 mapped to tasks, 11 unmapped ⚠️
+**Coverage:** 11 total, 11 mapped to tasks, 0 unmapped ✅
 
 ---
 
 ## Success Criteria
 
-- [ ] Every generated XSD in fixtures validates its source XML.
-- [ ] Type inference matches expectations on all fixtures.
+- [x] Every generated XSD in fixtures validates its source XML.
+- [x] Type inference matches expectations on all fixtures.

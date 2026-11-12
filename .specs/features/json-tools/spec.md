@@ -8,8 +8,8 @@ Developers constantly receive minified or malformed JSON from logs, APIs and con
 
 ## Goals
 
-- [ ] Format a 5 MB JSON without freezing the UI (processing off the main thread above a size threshold).
-- [ ] Every syntax error reports line and column and is highlighted in the editor.
+- [x] Format a 5 MB JSON without freezing the UI (processing off the main thread above a size threshold).
+- [x] Every syntax error reports line and column and is highlighted in the editor.
 
 ## Out of Scope
 
@@ -82,22 +82,22 @@ Developers constantly receive minified or malformed JSON from logs, APIs and con
 
 ## Requirement Traceability
 
-| Requirement ID | Story                         | Phase  | Status  |
+| Requirement ID | Story                         | Task | Status |
 | -------------- | ----------------------------- | ------ | ------- |
-| JSON-01        | P1: Beautify (indent options) | Design | Pending |
-| JSON-02        | P1: Minify                    | Design | Pending |
-| JSON-03        | P1: Worker for large input    | Design | Pending |
-| JSON-04        | P1: Validation status/summary | Design | Pending |
-| JSON-05        | P1: Error line/col + lint     | Design | Pending |
-| JSON-06        | P1: Big number preservation   | Design | Pending |
-| JSON-07        | P2: Sort keys                 | -      | Pending |
-| JSON-08        | P2: Duplicate keys warning    | -      | Pending |
+| JSON-01        | P1: Beautify (indent options) | T8, T9 | Verified |
+| JSON-02        | P1: Minify                    | T8, T9 | Verified |
+| JSON-03        | P1: Worker for large input    | T8, T9 | Verified |
+| JSON-04        | P1: Validation status/summary | T8, T9 | Verified |
+| JSON-05        | P1: Error line/col + lint     | T8, T9 | Verified |
+| JSON-06        | P1: Big number preservation   | T8, T9 | Verified |
+| JSON-07        | P2: Sort keys                 | T8, T9 | Verified |
+| JSON-08        | P2: Duplicate keys warning    | T8, T9 | Verified |
 
-**Coverage:** 8 total, 0 mapped to tasks, 8 unmapped ⚠️
+**Coverage:** 8 total, 8 mapped to tasks, 0 unmapped ✅
 
 ---
 
 ## Success Criteria
 
-- [ ] 5 MB JSON formats with UI remaining responsive.
-- [ ] Error position matches the real syntax error in 100% of test fixtures.
+- [x] 5 MB JSON formats with UI remaining responsive.
+- [x] Error position matches the real syntax error in 100% of test fixtures.

@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kanivete
 
-## Getting Started
+The developer's Swiss army knife: a 100% client-side toolbox that runs
+entirely in the browser. Nothing you paste is stored or sent anywhere.
 
-First, run the development server:
+## Tools
+
+| Group           | Tool                      | Route                         |
+| --------------- | ------------------------- | ----------------------------- |
+| Beautify        | JSON Beautify / Minify    | `/beautify/json`              |
+| Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`               |
+| Validation      | JSON Validation           | `/validation/json`            |
+| Validation      | XML Validation + Beautify | `/validation/xml`             |
+| Transformations | XML → XSD                 | `/transformations/xml-to-xsd` |
+| Helpers         | Connection String Builder | `/helpers/connection-string`  |
+
+The header also links to [transform.tools](https://transform.tools) and
+[webhook.cool](https://webhook.cool).
+
+## Stack
+
+Next.js 16 (App Router, static export), React 19, TypeScript, Chakra UI 3,
+CodeMirror 6, Web Workers for heavy processing, Vitest + Testing Library.
+
+## Running locally
+
+Requires Node.js 24.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To run the production build, export the static site and serve the `out`
+folder with any static file server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npx serve out
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Script              | Description                   |
+| ------------------- | ----------------------------- |
+| `npm run dev`       | Development server            |
+| `npm run build`     | Static export to `out/`       |
+| `npm run lint`      | ESLint                        |
+| `npm run typecheck` | Route type generation + `tsc` |
+| `npm test`          | Unit and component tests      |
+| `npm run format`    | Prettier                      |
 
-To learn more about Next.js, take a look at the following resources:
+XSD tests validate the generated schemas with `xmllint` when it is installed
+(it ships with macOS).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+src/
+  app/            routes (thin pages that render a feature screen)
+  components/     shared UI: navigation, editor, tool layout, form fields
+  features/       one folder per tool: lib (pure logic), workers, screens
+  lib/            shared hooks and the Web Worker client
+  registry/       tools, groups and external links (single source of truth)
+  theme/          Chakra system: tokens and semantic tokens
+```
 
-## Deploy on Vercel
+Specs, designs and decisions live in `.specs/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To add a tool, create its feature folder and route, then add one entry to
+`src/registry/tools.ts`; the menu picks it up automatically.

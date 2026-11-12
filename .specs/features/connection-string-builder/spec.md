@@ -8,8 +8,8 @@ Writing database connection URIs by hand is error-prone: special characters in p
 
 ## Goals
 
-- [ ] Produce a valid URI for every supported engine with correctly percent-encoded credentials.
-- [ ] Credentials never leave the browser and are never persisted.
+- [x] Produce a valid URI for every supported engine with correctly percent-encoded credentials.
+- [x] Credentials never leave the browser and are never persisted.
 
 ## Out of Scope
 
@@ -134,27 +134,27 @@ Each engine is defined declaratively (scheme, default port, fields, suggested pa
 
 ## Requirement Traceability
 
-| Requirement ID | Story                              | Phase  | Status  |
+| Requirement ID | Story                              | Task | Status |
 | -------------- | ---------------------------------- | ------ | ------- |
-| CONN-01        | P1: Engine selection & defaults    | Design | Pending |
-| CONN-02        | P1: Real-time URI preview          | Design | Pending |
-| CONN-03        | P1: Field validation               | Design | Pending |
-| CONN-04        | P1: Copy + password masking        | Design | Pending |
-| CONN-05        | P1: MongoDB multi-host / SRV       | Design | Pending |
-| CONN-06        | P1: Suggested params per engine    | Design | Pending |
-| CONN-07        | P1: Custom params                  | Design | Pending |
-| CONN-08        | P1: Percent-encoding               | Design | Pending |
-| CONN-09        | P1: Encoding warning               | Design | Pending |
-| CONN-10        | P2: Security notice                | -      | Pending |
-| CONN-11        | P1: Oracle Easy Connect Plus rules | Design | Pending |
-| CONN-12        | P1: ClickHouse secure toggle       | Design | Pending |
-| CONN-13        | P1: SQL Server database/instance   | Design | Pending |
+| CONN-01        | P1: Engine selection & defaults    | T13, T14 | Verified |
+| CONN-02        | P1: Real-time URI preview          | T13, T14 | Verified |
+| CONN-03        | P1: Field validation               | T13, T14 | Verified |
+| CONN-04        | P1: Copy + password masking        | T13, T14 | Verified |
+| CONN-05        | P1: MongoDB multi-host / SRV       | T13, T14 | Verified |
+| CONN-06        | P1: Suggested params per engine    | T13, T14 | Verified |
+| CONN-07        | P1: Custom params                  | T13, T14 | Verified |
+| CONN-08        | P1: Percent-encoding               | T13, T14 | Verified |
+| CONN-09        | P1: Encoding warning               | T13, T14 | Verified |
+| CONN-10        | P2: Security notice                | T13, T14 | Verified |
+| CONN-11        | P1: Oracle Easy Connect Plus rules | T13, T14 | Verified |
+| CONN-12        | P1: ClickHouse secure toggle       | T13, T14 | Verified |
+| CONN-13        | P1: SQL Server database/instance   | T13, T14 | Verified |
 
-**Coverage:** 13 total, 0 mapped to tasks, 13 unmapped ⚠️
+**Coverage:** 13 total, 13 mapped to tasks, 0 unmapped ✅
 
 ---
 
 ## Success Criteria
 
-- [ ] All engine fixtures produce URIs accepted by the official drivers' parsers (verified in unit tests with known-good strings).
-- [ ] Zero network requests triggered by form input.
+- [x] All engine fixtures produce URIs accepted by the official drivers' parsers (verified in unit tests with known-good strings).
+- [x] Zero network requests triggered by form input.

@@ -8,8 +8,8 @@ JSX snippets copied from DevTools, docs, AI outputs or minified bundles are hard
 
 ## Goals
 
-- [ ] Output is identical to Prettier's for the same options.
-- [ ] Formatting never blocks typing (runs in a Web Worker).
+- [x] Output is identical to Prettier's for the same options.
+- [x] Formatting never blocks typing (runs in a Web Worker).
 
 ## Out of Scope
 
@@ -66,20 +66,20 @@ JSX snippets copied from DevTools, docs, AI outputs or minified bundles are hard
 
 ## Requirement Traceability
 
-| Requirement ID | Story                        | Phase  | Status  |
+| Requirement ID | Story                        | Task | Status |
 | -------------- | ---------------------------- | ------ | ------- |
-| JSX-01         | P1: Format in worker         | Design | Pending |
-| JSX-02         | P1: TSX support              | Design | Pending |
-| JSX-03         | P1: Syntax error reporting   | Design | Pending |
-| JSX-04         | P1: Lazy-load Prettier       | Design | Pending |
-| JSX-05         | P1: Formatting options       | Design | Pending |
-| JSX-06         | P1: Worker resilience        | Design | Pending |
+| JSX-01         | P1: Format in worker         | T10 | Verified |
+| JSX-02         | P1: TSX support              | T10 | Verified |
+| JSX-03         | P1: Syntax error reporting   | T10 | Verified |
+| JSX-04         | P1: Lazy-load Prettier       | T10 | Verified |
+| JSX-05         | P1: Formatting options       | T10 | Verified |
+| JSX-06         | P1: Worker resilience        | T10 | Verified |
 
-**Coverage:** 6 total, 0 mapped to tasks, 6 unmapped ⚠️
+**Coverage:** 6 total, 6 mapped to tasks, 0 unmapped ✅
 
 ---
 
 ## Success Criteria
 
-- [ ] Output matches Prettier CLI for all test fixtures.
-- [ ] Prettier code is absent from the home page bundle.
+- [x] Output matches Prettier CLI for all test fixtures.
+- [x] Prettier code is absent from the home page bundle.

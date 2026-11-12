@@ -39,13 +39,20 @@ graph LR
 interface ElementStats {
   name: string;
   occurrences: number;
-  textSamples: string[];
-  hasMixedContent: boolean;
-  attributes: Map<string, string[]>;      // attribute -> samples (length = presence count)
+  textType: SimpleType | null;            // narrowed incrementally, no samples kept
+  hasText: boolean;                       // text + children => mixed="true"
+  attributes: Map<string, { type: SimpleType; count: number }>;
   children: Map<string, ChildStats>;      // insertion order = first appearance
+  childFollowers: Map<string, Set<string>>; // order graph between sibling names
+  hasInterleavedChildren: boolean;        // e.g. <x/><y/><x/>
 }
 interface ChildStats { element: ElementStats; parentsWithChild: number; maxPerParent: number }
 ```
 
 `minOccurs="0"` when `parentsWithChild < parent.occurrences`; `maxOccurs="unbounded"` when
-`maxPerParent > 1`; attribute `use="required"` when `samples.length === occurrences`.
+`maxPerParent > 1`; attribute `use="required"` when `count === occurrences`.
+
+Types are merged per value (`integer` + `decimal` → `decimal`, anything else → `string`), so
+memory stays flat on large inputs. Child order comes from a topological sort of
+`childFollowers`; when no single order fits (cycle or interleaving), the children are declared
+in a repeatable `xs:choice` with a notice, so the schema still validates the source.
