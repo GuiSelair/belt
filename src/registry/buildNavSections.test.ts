@@ -53,7 +53,7 @@ describe('buildNavSections', () => {
         ...tools,
         {
           id: 'xml-to-xsd',
-          name: 'XML → XSD',
+          name: 'XML to XSD',
           description: 'Generate XSD',
           groupId: 'transformations',
           href: '/transformations/xml-to-xsd',
@@ -68,7 +68,7 @@ describe('buildNavSections', () => {
     expect(transformations?.items).toEqual([
       {
         id: 'xml-to-xsd',
-        label: 'XML → XSD',
+        label: 'XML to XSD',
         description: 'Generate XSD',
         href: '/transformations/xml-to-xsd',
         external: false,

@@ -3,7 +3,9 @@ import type { Metadata } from 'next';
 
 import { Container, Heading, Stack, Text } from '@chakra-ui/react';
 
-import { getTool, type ToolId } from '@/registry';
+import { getRelatedTools, getTool, type ToolId } from '@/registry';
+
+import { RelatedTools } from './RelatedTools';
 
 interface ToolPageProps {
   toolId: ToolId;
@@ -21,13 +23,14 @@ export function ToolPage({ toolId, children }: ToolPageProps) {
   return (
     <Container maxW="7xl" py={{ base: '8', md: '12' }}>
       <Stack gap="8">
-        <Stack gap="2">
+        <Stack gap="3">
           <Heading as="h1" size={{ base: '2xl', md: '3xl' }}>
             {tool.name}
           </Heading>
           <Text color="fg.muted" fontSize="lg" maxW="3xl">
             {tool.description}
           </Text>
+          <RelatedTools tools={getRelatedTools(toolId)} />
         </Stack>
         {children}
       </Stack>

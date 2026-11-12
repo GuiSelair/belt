@@ -6,6 +6,7 @@ export type ToolGroupId =
 export type ToolId =
   | 'json-beautify'
   | 'jsx-beautify'
+  | 'xml-beautify'
   | 'json-validation'
   | 'xml-validation'
   | 'xml-to-xsd'
@@ -22,6 +23,7 @@ export interface ToolDefinition {
   description: string;
   groupId: ToolGroupId;
   href: Route;
+  relatedToolIds?: ToolId[];
 }
 
 export interface ExternalLink {

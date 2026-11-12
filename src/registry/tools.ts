@@ -8,6 +8,7 @@ export const tools: readonly ToolDefinition[] = [
       'Format or minify JSON with your preferred indentation, without losing big-number precision.',
     groupId: 'beautify',
     href: '/beautify/json',
+    relatedToolIds: ['json-validation'],
   },
   {
     id: 'jsx-beautify',
@@ -18,28 +19,40 @@ export const tools: readonly ToolDefinition[] = [
     href: '/beautify/jsx',
   },
   {
+    id: 'xml-beautify',
+    name: 'XML Beautify',
+    description:
+      'Format XML with your preferred indentation, keeping comments and CDATA sections.',
+    groupId: 'beautify',
+    href: '/beautify/xml',
+    relatedToolIds: ['xml-validation', 'xml-to-xsd'],
+  },
+  {
     id: 'json-validation',
     name: 'JSON Validation',
     description:
       'Check whether JSON is valid and jump straight to the line and column that breaks it.',
     groupId: 'validation',
     href: '/validation/json',
+    relatedToolIds: ['json-beautify'],
   },
   {
     id: 'xml-validation',
     name: 'XML Validation',
     description:
-      'Check XML well-formedness, pinpoint errors and beautify the document.',
+      'Check XML well-formedness and jump straight to the line and column that breaks it.',
     groupId: 'validation',
     href: '/validation/xml',
+    relatedToolIds: ['xml-beautify', 'xml-to-xsd'],
   },
   {
     id: 'xml-to-xsd',
-    name: 'XML → XSD',
+    name: 'XML to XSD',
     description:
       'Generate an XML Schema from a sample document, with occurrence and type inference.',
     groupId: 'transformations',
     href: '/transformations/xml-to-xsd',
+    relatedToolIds: ['xml-validation', 'xml-beautify'],
   },
   {
     id: 'connection-string',
@@ -59,4 +72,8 @@ export function getTool(id: ToolId): ToolDefinition {
 
 export function getToolsByGroup(groupId: ToolGroupId): ToolDefinition[] {
   return tools.filter((tool) => tool.groupId === groupId);
+}
+
+export function getRelatedTools(id: ToolId): ToolDefinition[] {
+  return (getTool(id).relatedToolIds ?? []).map(getTool);
 }
