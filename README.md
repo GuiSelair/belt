@@ -9,13 +9,15 @@ entirely in the browser. Nothing you paste is stored or sent anywhere.
 | --------------- | ------------------------- | ----------------------------- |
 | Beautify        | JSON Beautify / Minify    | `/beautify/json`              |
 | Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`               |
+| Beautify        | XML Beautify              | `/beautify/xml`               |
 | Validation      | JSON Validation           | `/validation/json`            |
-| Validation      | XML Validation + Beautify | `/validation/xml`             |
-| Transformations | XML → XSD                 | `/transformations/xml-to-xsd` |
+| Validation      | XML Validation            | `/validation/xml`             |
+| Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
 | Helpers         | Connection String Builder | `/helpers/connection-string`  |
 
 The header also links to [transform.tools](https://transform.tools) and
-[webhook.cool](https://webhook.cool).
+[webhook.cool](https://webhook.cool). Each tool does one job and links to
+its related tools (for example, JSON Validation links to JSON Beautify).
 
 ## Stack
 

@@ -18,7 +18,7 @@
 - Tool registry as single source of truth (routes, menu, featured links)
 - Top navigation with grouped hover/focus flyout menus + mobile menu
 - "Links" menu with external sites (transform.tools, webhook.cool — new tab)
-- Home page: centered hero with name, tagline, all brand colors, featured links (JSON Beautify, XML → XSD)
+- Home page: centered hero with name, tagline, all brand colors, featured links (JSON Beautify, XML to XSD)
 - Shared tool layout (input/output editors, toolbar, status/error area)
 - CodeMirror dark theme following brand colors
 
@@ -34,7 +34,7 @@
 **XML Tools** (`.specs/features/xml-tools/spec.md`) - DONE
 
 - XML Validation (well-formedness, line/column diagnostics)
-- XML → XSD (schema inference from sample XML, in a Web Worker)
+- XML to XSD (schema inference from sample XML, in a Web Worker)
 
 **Connection String Builder** (`.specs/features/connection-string-builder/spec.md`) - DONE
 
