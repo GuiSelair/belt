@@ -11,6 +11,7 @@ export type ToolId =
   | 'json-validation'
   | 'xml-validation'
   | 'xml-to-xsd'
+  | 'sql-aliases'
   | 'connection-string';
 
 export interface ToolGroup {

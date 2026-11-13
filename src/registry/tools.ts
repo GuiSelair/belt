@@ -64,6 +64,14 @@ export const tools: readonly ToolDefinition[] = [
     relatedToolIds: ['xml-validation', 'xml-beautify'],
   },
   {
+    id: 'sql-aliases',
+    name: 'SQL Aliases',
+    description:
+      'Add AS aliases to every selected column, table and join of a SQL query, keeping its formatting.',
+    groupId: 'transformations',
+    href: '/transformations/sql-aliases',
+  },
+  {
     id: 'connection-string',
     name: 'Connection String Builder',
     description:
