@@ -23,6 +23,8 @@
 - **2026-11-12** — XSD inference narrows types incrementally (no sample storage) and falls back to a repeatable `xs:choice` when sibling order varies. Generation always runs in a Web Worker.
 - **2026-11-12** — Single responsibility per tool: validation screens only validate; XML beautify moved to its own `/beautify/xml` tool. Tools declare `relatedToolIds` in the registry and `ToolPage` renders them as links.
 - **2026-11-12** — Visual refresh: header uses the page background, home hero is solid brand blue with hand-drawn SVG doodles (drawing animation off under reduced motion), wordmark logo in Permanent Marker (self-hosted via `next/font`). Tool renamed "XML to XSD".
+- **2026-11-12** — Hero v2: dark section matching the header with a rounded brand-blue grid panel; doodles and the "100% in your browser" badge removed, only the scribble circle kept.
+- **2026-11-12** — New "Minify" group: JSON Minify (`/minify/json`) split from JSON Beautify; both share `useJsonFormatter` and `JsonFormatterView`. "Sort keys" removed. Tool descriptions are no longer shown on pages or in menus (kept only as page metadata).
 - **2026-11-12** — Connection string: empty port = engine default; Oracle URI omits credentials; Redis allows password-only userinfo.
 
 ## Blockers

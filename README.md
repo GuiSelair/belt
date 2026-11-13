@@ -7,9 +7,10 @@ entirely in the browser. Nothing you paste is stored or sent anywhere.
 
 | Group           | Tool                      | Route                         |
 | --------------- | ------------------------- | ----------------------------- |
-| Beautify        | JSON Beautify / Minify    | `/beautify/json`              |
+| Beautify        | JSON Beautify             | `/beautify/json`              |
 | Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`               |
 | Beautify        | XML Beautify              | `/beautify/xml`               |
+| Minify          | JSON Minify               | `/minify/json`                |
 | Validation      | JSON Validation           | `/validation/json`            |
 | Validation      | XML Validation            | `/validation/xml`             |
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
