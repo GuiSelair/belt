@@ -25,6 +25,9 @@
 - **2026-11-12** — Visual refresh: header uses the page background, home hero is solid brand blue with hand-drawn SVG doodles (drawing animation off under reduced motion), wordmark logo in Permanent Marker (self-hosted via `next/font`). Tool renamed "XML to XSD".
 - **2026-11-12** — Hero v2: dark section matching the header with a rounded brand-blue grid panel; doodles and the "100% in your browser" badge removed, only the scribble circle kept.
 - **2026-11-12** — New "Minify" group: JSON Minify (`/minify/json`) split from JSON Beautify; both share `useJsonFormatter` and `JsonFormatterView`. "Sort keys" removed. Tool descriptions are no longer shown on pages or in menus (kept only as page metadata).
+- **2026-11-12** — Project renamed to **Belt** (from "utility belt"); folder stays `~/Documents/kanivete`. Brand font: Unbounded 900 (self-hosted via `next/font`).
+- **2026-11-12** — Home: blue grid background covers the whole page (via `body:has([data-home-hero])`), header solid brand blue. Other pages use a softer navy scale (`#172255` base); header has no bottom divider.
+- **2026-11-12** — Footer on every page with a GitHub link (`siteConfig.repositoryUrl`, placeholder until the remote exists).
 - **2026-11-12** — Connection string: empty port = engine default; Oracle URI omits credentials; Redis allows password-only userinfo.
 
 ## Blockers
