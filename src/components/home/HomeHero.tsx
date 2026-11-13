@@ -43,8 +43,9 @@ export function HomeHero() {
             letterSpacing="tight"
             position="relative"
           >
-            <SparkLines />
+            <SparkLines placement="topStart" />
             Belt
+            <SparkLines placement="bottomEnd" delay={1.2} />
           </Heading>
           <Text fontSize={{ base: 'lg', md: '2xl' }} color="fg" maxW="2xl">
             The{' '}
