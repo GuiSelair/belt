@@ -12,7 +12,9 @@ import { ArrowRight } from 'lucide-react';
 
 import { getTool } from '@/registry';
 
+import { CurvedArrow } from './CurvedArrow';
 import { ScribbleCircle } from './ScribbleCircle';
+import { SparkLines } from './SparkLines';
 
 export function HomeHero() {
   const jsonBeautify = getTool('json-beautify');
@@ -39,7 +41,9 @@ export function HomeHero() {
             fontSize={{ base: '7xl', md: '9xl' }}
             lineHeight="1"
             letterSpacing="tight"
+            position="relative"
           >
+            <SparkLines />
             Belt
           </Heading>
           <Text fontSize={{ base: 'lg', md: '2xl' }} color="fg" maxW="2xl">
@@ -59,20 +63,23 @@ export function HomeHero() {
                 <ArrowRight aria-hidden="true" />
               </NextLink>
             </Button>
-            <Button
-              asChild
-              size="xl"
-              variant="outline"
-              rounded="full"
-              color="fg"
-              borderColor="fg"
-              _hover={{ bg: 'whiteAlpha.200' }}
-            >
-              <NextLink href={xmlToXsd.href}>
-                {xmlToXsd.name}
-                <ArrowRight aria-hidden="true" />
-              </NextLink>
-            </Button>
+            <Box position="relative">
+              <Button
+                asChild
+                size="xl"
+                variant="outline"
+                rounded="full"
+                color="fg"
+                borderColor="fg"
+                _hover={{ bg: 'whiteAlpha.200' }}
+              >
+                <NextLink href={xmlToXsd.href}>
+                  {xmlToXsd.name}
+                  <ArrowRight aria-hidden="true" />
+                </NextLink>
+              </Button>
+              <CurvedArrow />
+            </Box>
           </HStack>
         </Stack>
       </Container>

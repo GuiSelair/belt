@@ -6,12 +6,14 @@ interface HandDrawnPathProps {
   d: string;
   delay?: string;
   duration?: string;
+  strokeWidth?: number;
 }
 
 export function HandDrawnPath({
   d,
   delay = '0s',
   duration = '0.8s',
+  strokeWidth = 3,
 }: HandDrawnPathProps) {
   return (
     <chakra.path
@@ -19,7 +21,7 @@ export function HandDrawnPath({
       pathLength={1}
       fill="none"
       stroke="currentColor"
-      strokeWidth="3"
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       vectorEffect="non-scaling-stroke"
