@@ -8,16 +8,17 @@ enviado para qualquer lugar.
 
 ## Ferramentas
 
-| Grupo           | Ferramenta                | Rota                          |
-| --------------- | ------------------------- | ----------------------------- |
-| Beautify        | JSON Beautify             | `/beautify/json`              |
-| Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`               |
-| Beautify        | XML Beautify              | `/beautify/xml`               |
-| Minify          | JSON Minify               | `/minify/json`                |
-| Validation      | JSON Validation           | `/validation/json`            |
-| Validation      | XML Validation            | `/validation/xml`             |
-| Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
-| Helpers         | Connection String Builder | `/helpers/connection-string`  |
+| Grupo           | Ferramenta                | Rota                           |
+| --------------- | ------------------------- | ------------------------------ |
+| Beautify        | JSON Beautify             | `/beautify/json`               |
+| Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`                |
+| Beautify        | XML Beautify              | `/beautify/xml`                |
+| Minify          | JSON Minify               | `/minify/json`                 |
+| Validation      | JSON Validation           | `/validation/json`             |
+| Validation      | XML Validation            | `/validation/xml`              |
+| Transformations | XML to XSD                | `/transformations/xml-to-xsd`  |
+| Transformations | SQL Aliases               | `/transformations/sql-aliases` |
+| Helpers         | Connection String Builder | `/helpers/connection-string`   |
 
 O header também tem links para [transform.tools](https://transform.tools) e
 [webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e
