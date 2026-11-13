@@ -10,6 +10,7 @@ export type ToolId =
   | 'json-minify'
   | 'json-validation'
   | 'xml-validation'
+  | 'sql-validation'
   | 'xml-to-xsd'
   | 'connection-string';
 
