@@ -12,7 +12,6 @@ import { ArrowRight } from 'lucide-react';
 
 import { getTool } from '@/registry';
 
-import { FloatingShapes } from './FloatingShapes';
 import { ScribbleCircle } from './ScribbleCircle';
 
 export function HomeHero() {
@@ -28,18 +27,15 @@ export function HomeHero() {
       placeItems="center"
       flex="1"
       py="16"
-      position="relative"
-      overflow="hidden"
     >
-      <FloatingShapes />
-      <Container maxW="4xl" textAlign="center" position="relative">
+      <Container maxW="4xl" textAlign="center">
         <Stack gap="8" align="center">
           <Heading
             as="h1"
             id="home-title"
             fontFamily="brand"
             fontWeight="black"
-            color="fg.highlight"
+            color="fg"
             fontSize={{ base: '7xl', md: '9xl' }}
             lineHeight="1"
             letterSpacing="tight"

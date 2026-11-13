@@ -48,13 +48,6 @@ const config = defineConfig({
         from: { strokeDashoffset: '1' },
         to: { strokeDashoffset: '0' },
       },
-      float: {
-        '0%, 100%': { transform: 'translateY(0) rotate(var(--float-rotate))' },
-        '50%': {
-          transform:
-            'translateY(var(--float-distance)) rotate(calc(var(--float-rotate) + 4deg))',
-        },
-      },
     },
     semanticTokens: {
       colors: {

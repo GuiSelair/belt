@@ -6,7 +6,7 @@ import { chakra } from '@chakra-ui/react';
 import { HandDrawnPath } from './HandDrawnPath';
 
 const LOOP_PATH =
-  'M 30 52 C 18 22, 130 6, 215 10 C 280 13, 298 34, 286 56 C 272 78, 160 82, 90 76 C 30 71, 4 56, 14 36 C 24 18, 90 8, 160 9';
+  'M 130 6 C 220 2, 306 18, 296 46 C 286 74, 180 84, 100 80 C 30 77, 0 64, 2 44 C 4 20, 40 0, 180 3';
 
 interface ScribbleCircleProps {
   children: ReactNode;
