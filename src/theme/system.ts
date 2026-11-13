@@ -48,6 +48,13 @@ const config = defineConfig({
         from: { strokeDashoffset: '1' },
         to: { strokeDashoffset: '0' },
       },
+      float: {
+        '0%, 100%': { transform: 'translateY(0) rotate(var(--float-rotate))' },
+        '50%': {
+          transform:
+            'translateY(var(--float-distance)) rotate(calc(var(--float-rotate) + 4deg))',
+        },
+      },
     },
     semanticTokens: {
       colors: {
@@ -104,7 +111,7 @@ const config = defineConfig({
     },
     body: {
       '--header-bg': '{colors.bg}',
-      '--grid-line': 'color-mix(in srgb, {colors.navy.400} 18%, transparent)',
+      '--grid-line': 'color-mix(in srgb, {colors.navy.400} 7%, transparent)',
       bgImage:
         'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
       bgSize: '4rem 4rem',
@@ -112,7 +119,7 @@ const config = defineConfig({
     'body:has([data-home-hero])': {
       '--header-bg': '{colors.brand.blue}',
       '--grid-line': '{colors.whiteAlpha.200}',
-      bg: 'bg.brand',
+      bgColor: 'bg.brand',
     },
     '*:focus-visible': {
       outline: '2px solid {colors.brand.green}',
