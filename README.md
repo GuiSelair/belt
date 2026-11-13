@@ -18,6 +18,7 @@ enviado para qualquer lugar.
 | Validation      | XML Validation            | `/validation/xml`             |
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
 | Helpers         | Connection String Builder | `/helpers/connection-string`  |
+| Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`     |
 
 O header também tem links para [transform.tools](https://transform.tools) e
 [webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e

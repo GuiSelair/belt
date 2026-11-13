@@ -11,7 +11,8 @@ export type ToolId =
   | 'json-validation'
   | 'xml-validation'
   | 'xml-to-xsd'
-  | 'connection-string';
+  | 'connection-string'
+  | 'wsdl-inspector';
 
 export interface ToolGroup {
   id: ToolGroupId;
