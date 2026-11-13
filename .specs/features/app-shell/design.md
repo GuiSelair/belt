@@ -80,7 +80,7 @@ src/
 
 ### Home (SHELL-05, SHELL-10)
 
-- `HomeHero` (Server Component): single `h1` "Kanivete", tagline with green highlight,
+- `HomeHero` (Server Component): single `h1` "Belt", tagline with green highlight,
   two featured links resolved with `getTool('json-beautify')` / `getTool('xml-to-xsd')`.
   Hero surface uses brand blue `#0131CD`; CTAs green with navy text.
 

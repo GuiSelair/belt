@@ -52,7 +52,7 @@ Every tool needs a consistent, accessible frame: discoverable navigation, a shar
 3. WHEN the user presses Escape or moves pointer/focus away THEN the system SHALL close the panel and return focus to the trigger (keyboard case).
 4. WHEN the current route belongs to a tool THEN the system SHALL mark its group trigger and item as active (`aria-current="page"` on the item).
 5. WHEN the viewport is below the `md` breakpoint THEN the system SHALL replace the flyouts with an accessible menu button opening a drawer with groups as sections.
-6. WHEN the header renders THEN the system SHALL show the Kanivete logo/wordmark linking to home.
+6. WHEN the header renders THEN the system SHALL show the Belt logo/wordmark linking to home.
 
 **Independent Test**: Navigate the whole menu using only keyboard and only mouse; verify panel open/close and active states.
 
@@ -60,7 +60,7 @@ Every tool needs a consistent, accessible frame: discoverable navigation, a shar
 
 ### P1: "Links" menu with external sites ⭐ MVP
 
-**User Story**: As a developer, I want a header menu with curated external sites (e.g. transform.tools, webhook.cool) so that I can reach complementary tools not available in Kanivete.
+**User Story**: As a developer, I want a header menu with curated external sites (e.g. transform.tools, webhook.cool) so that I can reach complementary tools not available in Belt.
 
 **Why P1**: Explicit product requirement (complement, not copy).
 
@@ -80,20 +80,20 @@ Every tool needs a consistent, accessible frame: discoverable navigation, a shar
 
 ### P1: Home page hero and featured links ⭐ MVP
 
-**User Story**: As a developer, I want a striking home page that tells me what Kanivete is and points me to its flagship tools so that I can start quickly.
+**User Story**: As a developer, I want a striking home page that tells me what Belt is and points me to its flagship tools so that I can start quickly.
 
 **Why P1**: Entry point and brand showcase of the platform.
 
 **Acceptance Criteria**:
 
 1. WHEN the user opens `/` THEN the system SHALL render the top navigation menu, and a vertically and horizontally centered hero below it.
-2. WHEN the hero renders THEN it SHALL show the project name "Kanivete" as the single `h1` and a tagline describing it as the developer's pocket knife (e.g. "The Swiss army knife for developers — beautify, validate and transform data right in your browser.").
+2. WHEN the hero renders THEN it SHALL show the project name "Belt" as the single `h1` and a tagline describing it as the developer's pocket knife (e.g. "The Swiss army knife for developers — beautify, validate and transform data right in your browser.").
 3. WHEN the home renders THEN all brand colors SHALL be visibly present: blue `#0131CD` (background/surfaces), white `#FFFFFF` (text) and green `#B9FC01` (highlight — e.g. a word of the name/tagline or the CTAs), respecting the contrast rules.
 4. WHEN the hero renders THEN below the tagline it SHALL show two featured links: **JSON Beautify** (`/beautify/json`) and **XML → XSD** (`/transformations/xml-to-xsd`).
 5. WHEN featured links render THEN their label and route SHALL be taken from the tool registry by tool id (no duplicated names/routes).
 6. WHEN a featured link is activated (click or Enter) THEN the system SHALL navigate to the tool route.
 
-**Independent Test**: Render home; assert one `h1` "Kanivete", the tagline, and two links pointing to `/beautify/json` and `/transformations/xml-to-xsd`; run axe with zero contrast violations.
+**Independent Test**: Render home; assert one `h1` "Belt", the tagline, and two links pointing to `/beautify/json` and `/transformations/xml-to-xsd`; run axe with zero contrast violations.
 
 ---
 

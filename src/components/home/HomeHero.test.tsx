@@ -11,7 +11,7 @@ describe('HomeHero', () => {
 
     const headings = screen.getAllByRole('heading', { level: 1 });
     expect(headings).toHaveLength(1);
-    expect(headings[0]).toHaveTextContent('Kanivete');
+    expect(headings[0]).toHaveTextContent('Belt');
     expect(screen.getByText(/Swiss army knife/)).toBeInTheDocument();
   });
 

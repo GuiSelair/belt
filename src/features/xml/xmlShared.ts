@@ -3,7 +3,7 @@ import type { EditorDiagnostic } from '@/components/editor/CodeEditor';
 import type { XmlSyntaxError } from './lib/validateXml';
 
 export const XML_SAMPLE = `<?xml version="1.0" encoding="UTF-8"?>
-<library xmlns="urn:kanivete:library" updated="2026-11-12T09:30:00Z">
+<library xmlns="urn:belt:library" updated="2026-11-12T09:30:00Z">
   <!-- Books available in the shelf -->
   <book id="1" available="true">
     <title>Refactoring</title>

@@ -11,7 +11,7 @@ import { PREFIXED_ELEMENT_NOTICE } from './inferElementTree';
 import { ALL_FALLBACK_NOTICE, unorderedChildrenNotice } from './writeXsd';
 
 const hasXmllint = spawnSync('xmllint', ['--version']).status === 0;
-const workDir = mkdtempSync(join(tmpdir(), 'kanivete-xsd-'));
+const workDir = mkdtempSync(join(tmpdir(), 'belt-xsd-'));
 
 afterAll(() => rmSync(workDir, { recursive: true, force: true }));
 
@@ -86,8 +86,8 @@ describe('generateXsd inference', () => {
 
   it('maps the default namespace to the target namespace', () => {
     expect(xsd).toContain(
-      'targetNamespace="urn:kanivete:library" ' +
-        'xmlns="urn:kanivete:library" elementFormDefault="qualified"',
+      'targetNamespace="urn:belt:library" ' +
+        'xmlns="urn:belt:library" elementFormDefault="qualified"',
     );
   });
 

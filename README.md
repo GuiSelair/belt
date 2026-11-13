@@ -1,4 +1,4 @@
-# Kanivete
+# Belt
 
 The developer's Swiss army knife: a 100% client-side toolbox that runs
 entirely in the browser. Nothing you paste is stored or sent anywhere.

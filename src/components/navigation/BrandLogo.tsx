@@ -12,7 +12,7 @@ export function BrandLogo() {
       textDecoration="none"
       _hover={{ color: 'fg.highlight', textDecoration: 'none' }}
     >
-      <NextLink href="/">Kanivete</NextLink>
+      <NextLink href="/">Belt</NextLink>
     </Link>
   );
 }

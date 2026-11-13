@@ -1,8 +1,8 @@
-# Kanivete
+# Belt
 
 **Vision:** A fast, beautiful, 100% client-side Swiss army knife for developers — beautifiers, validators, transformations and helpers in one place, complementing (not copying) transform.tools.
 **For:** Software developers (starting with the author's own daily workflow) who need quick, trustworthy data utilities without sending data to a server.
-**Solves:** Everyday utilities are scattered across many sites, often with poor UX, ads, or server round-trips that leak sensitive data (credentials, payloads). Kanivete groups them under one consistent, accessible, private UI.
+**Solves:** Everyday utilities are scattered across many sites, often with poor UX, ads, or server round-trips that leak sensitive data (credentials, payloads). Belt groups them under one consistent, accessible, private UI.
 
 ## Goals
 
