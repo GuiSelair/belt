@@ -16,6 +16,7 @@ enviado para qualquer lugar.
 | Minify          | JSON Minify               | `/minify/json`                |
 | Validation      | JSON Validation           | `/validation/json`            |
 | Validation      | XML Validation            | `/validation/xml`             |
+| Validation      | SQL Validation            | `/validation/sql`             |
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
 | Helpers         | Connection String Builder | `/helpers/connection-string`  |
 
