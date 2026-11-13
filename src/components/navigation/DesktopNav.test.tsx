@@ -20,14 +20,12 @@ const sections: NavSection[] = [
       {
         id: 'json-beautify',
         label: 'JSON Beautify',
-        description: 'Format JSON',
         href: '/beautify/json',
         external: false,
       },
       {
         id: 'jsx-beautify',
         label: 'JSX Beautify',
-        description: 'Format JSX',
         href: '/beautify/jsx',
         external: false,
       },
@@ -40,7 +38,6 @@ const sections: NavSection[] = [
       {
         id: 'transform-tools',
         label: 'transform.tools',
-        description: 'Polyglot web converter',
         href: 'https://transform.tools',
         external: true,
       },

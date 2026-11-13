@@ -21,6 +21,7 @@ interface NavFlyoutProps {
 
 const Trigger = chakra('button', {
   base: {
+    position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',
     gap: '1',
@@ -30,11 +31,16 @@ const Trigger = chakra('button', {
     fontWeight: 'medium',
     color: 'fg',
     cursor: 'pointer',
-    borderBottomWidth: '2px',
-    borderBottomColor: 'transparent',
     _hover: { bg: 'whiteAlpha.200' },
     _expanded: { bg: 'whiteAlpha.200' },
-    '&[data-active]': { borderBottomColor: 'fg.highlight' },
+    '&[data-active]::after': {
+      content: '""',
+      position: 'absolute',
+      insetInline: '3',
+      bottom: '0',
+      height: '2px',
+      bg: 'fg.highlight',
+    },
     '& svg': { transition: 'transform 0.15s ease' },
     '&[aria-expanded=true] svg': { transform: 'rotate(180deg)' },
     _motionReduce: { '& svg': { transition: 'none' } },
@@ -70,7 +76,8 @@ export function NavFlyout({
         left={align === 'start' ? '0' : undefined}
         right={align === 'end' ? '0' : undefined}
         zIndex="dropdown"
-        minW="xs"
+        minW="56"
+        whiteSpace="nowrap"
         p="2"
         bg="bg.panel"
         borderWidth="1px"

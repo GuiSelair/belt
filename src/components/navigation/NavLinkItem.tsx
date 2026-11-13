@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { Box, Link, Text, VisuallyHidden } from '@chakra-ui/react';
+import { Box, Link, VisuallyHidden } from '@chakra-ui/react';
 import { ExternalLink } from 'lucide-react';
 
 import type { NavItem } from '@/registry';
@@ -15,7 +15,7 @@ const linkStyles = {
   display: 'block',
   width: 'full',
   px: '3',
-  py: '2.5',
+  py: '2',
   rounded: 'md',
   borderLeftWidth: '3px',
   borderLeftColor: 'transparent',
@@ -27,22 +27,17 @@ const linkStyles = {
 
 function NavLinkContent({ item }: Pick<NavLinkItemProps, 'item'>) {
   return (
-    <>
-      <Box
-        as="span"
-        display="flex"
-        alignItems="center"
-        gap="1.5"
-        fontWeight="semibold"
-      >
-        {item.label}
-        {item.external && <ExternalLink size={14} aria-hidden="true" />}
-        {item.external && <VisuallyHidden>(opens in a new tab)</VisuallyHidden>}
-      </Box>
-      <Text as="span" display="block" fontSize="sm" color="fg.muted">
-        {item.description}
-      </Text>
-    </>
+    <Box
+      as="span"
+      display="flex"
+      alignItems="center"
+      gap="1.5"
+      fontWeight="medium"
+    >
+      {item.label}
+      {item.external && <ExternalLink size={14} aria-hidden="true" />}
+      {item.external && <VisuallyHidden>(opens in a new tab)</VisuallyHidden>}
+    </Box>
   );
 }
 

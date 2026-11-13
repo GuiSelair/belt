@@ -32,7 +32,6 @@ const links: ExternalLink[] = [
     id: 'transform-tools',
     name: 'transform.tools',
     href: 'https://transform.tools',
-    description: 'Polyglot web converter',
   },
 ];
 
@@ -69,7 +68,6 @@ describe('buildNavSections', () => {
       {
         id: 'xml-to-xsd',
         label: 'XML to XSD',
-        description: 'Generate XSD',
         href: '/transformations/xml-to-xsd',
         external: false,
       },
