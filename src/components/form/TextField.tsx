@@ -1,6 +1,6 @@
 'use client';
 
-import type { ChangeEvent, HTMLAttributes } from 'react';
+import { useState, type ChangeEvent, type HTMLAttributes } from 'react';
 
 import { Field, Input } from '@chakra-ui/react';
 
@@ -33,12 +33,19 @@ export function TextField({
   readOnly = false,
   flex,
 }: TextFieldProps) {
+  const [isTouched, setIsTouched] = useState(false);
+  const visibleError = isTouched ? error : undefined;
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     onChange(event.target.value);
   }
 
+  function handleBlur() {
+    setIsTouched(true);
+  }
+
   return (
-    <Field.Root invalid={Boolean(error)} required={required} flex={flex}>
+    <Field.Root invalid={Boolean(visibleError)} required={required} flex={flex}>
       <Field.Label>
         {label}
         <Field.RequiredIndicator />
@@ -48,16 +55,17 @@ export function TextField({
         type={type}
         value={value}
         onChange={handleChange}
+        onBlur={handleBlur}
         placeholder={placeholder}
         inputMode={inputMode}
         autoComplete={autoComplete}
         readOnly={readOnly}
         spellCheck={false}
       />
-      {helperText && !error && (
+      {helperText && !visibleError && (
         <Field.HelperText>{helperText}</Field.HelperText>
       )}
-      <Field.ErrorText>{error}</Field.ErrorText>
+      <Field.ErrorText>{visibleError}</Field.ErrorText>
     </Field.Root>
   );
 }

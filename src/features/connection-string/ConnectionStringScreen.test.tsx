@@ -67,11 +67,21 @@ describe('ConnectionStringScreen', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('does not flag empty required fields before the user leaves them', () => {
+    renderScreen();
+
+    expect(screen.queryByText('Host is required.')).not.toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^host/i })).not.toHaveAttribute(
+      'aria-invalid',
+    );
+  });
+
   it('links field errors to the input and hides the copy action', async () => {
     const user = renderScreen();
     const port = screen.getByRole('textbox', { name: /^port/i });
 
     await user.type(port, '99999');
+    await user.tab();
 
     expect(port).toHaveAccessibleDescription(
       'Port must be a number between 1 and 65535.',

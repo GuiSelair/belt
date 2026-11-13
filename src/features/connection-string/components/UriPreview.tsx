@@ -68,7 +68,7 @@ export function UriPreview({
           </Text>
         ) : (
           <Text color="fg.muted">
-            Fill in the highlighted fields to get a URI.
+            Fill in the required fields (marked with *) to get a URI.
           </Text>
         )}
       </Box>
