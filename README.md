@@ -72,7 +72,5 @@ src/
   theme/          system do Chakra: tokens e semantic tokens
 ```
 
-Specs, designs e decisões ficam em `.specs/`.
-
 Para adicionar uma ferramenta, crie a pasta da feature e a rota, depois adicione
 uma entrada em `src/registry/tools.ts`; o menu a inclui automaticamente.
