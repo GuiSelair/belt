@@ -35,6 +35,7 @@ export function HomeHero() {
             id="home-title"
             fontFamily="brand"
             fontWeight="black"
+            color="fg.highlight"
             fontSize={{ base: '7xl', md: '9xl' }}
             lineHeight="1"
             letterSpacing="tight"

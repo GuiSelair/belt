@@ -104,13 +104,15 @@ const config = defineConfig({
     },
     body: {
       '--header-bg': '{colors.bg}',
+      '--grid-line': 'color-mix(in srgb, {colors.navy.400} 18%, transparent)',
+      bgImage:
+        'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
+      bgSize: '4rem 4rem',
     },
     'body:has([data-home-hero])': {
       '--header-bg': '{colors.brand.blue}',
+      '--grid-line': '{colors.whiteAlpha.200}',
       bg: 'bg.brand',
-      bgImage:
-        'linear-gradient(to right, {colors.whiteAlpha.200} 1px, transparent 1px), linear-gradient(to bottom, {colors.whiteAlpha.200} 1px, transparent 1px)',
-      bgSize: '4rem 4rem',
     },
     '*:focus-visible': {
       outline: '2px solid {colors.brand.green}',
