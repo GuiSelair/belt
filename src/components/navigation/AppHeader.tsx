@@ -13,10 +13,8 @@ export function AppHeader() {
       position="sticky"
       top="0"
       zIndex="sticky"
-      bg="bg"
+      bg="var(--header-bg)"
       color="fg"
-      borderBottomWidth="1px"
-      borderColor="border.subtle"
     >
       <Container maxW="7xl">
         <Flex align="center" gap="6" minH="16">

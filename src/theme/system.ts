@@ -14,11 +14,11 @@ const config = defineConfig({
           white: { value: '#FFFFFF' },
         },
         navy: {
-          950: { value: '#010720' },
-          900: { value: '#020E3A' },
-          800: { value: '#05185A' },
-          700: { value: '#0A2478' },
-          600: { value: '#1838A0' },
+          950: { value: '#172255' },
+          900: { value: '#1E2B63' },
+          800: { value: '#263570' },
+          700: { value: '#30417F' },
+          600: { value: '#3D52A6' },
           500: { value: '#4A67D3' },
           400: { value: '#5B78DD' },
           300: { value: '#A9B8F0' },
@@ -40,7 +40,7 @@ const config = defineConfig({
         heading: { value: 'var(--font-geist-sans), system-ui, sans-serif' },
         body: { value: 'var(--font-geist-sans), system-ui, sans-serif' },
         mono: { value: 'var(--font-geist-mono), ui-monospace, monospace' },
-        brand: { value: 'var(--font-brand), cursive' },
+        brand: { value: 'var(--font-brand), system-ui, sans-serif' },
       },
     },
     keyframes: {
@@ -90,6 +90,8 @@ const config = defineConfig({
           focusRing: constant('{colors.brand.green}'),
         },
         gray: {
+          subtle: constant('{colors.navy.800}'),
+          border: constant('{colors.navy.500}'),
           focusRing: constant('{colors.brand.green}'),
         },
       },
@@ -99,6 +101,16 @@ const config = defineConfig({
     'html, body': {
       bg: 'bg',
       color: 'fg',
+    },
+    body: {
+      '--header-bg': '{colors.bg}',
+    },
+    'body:has([data-home-hero])': {
+      '--header-bg': '{colors.brand.blue}',
+      bg: 'bg.brand',
+      bgImage:
+        'linear-gradient(to right, {colors.whiteAlpha.200} 1px, transparent 1px), linear-gradient(to bottom, {colors.whiteAlpha.200} 1px, transparent 1px)',
+      bgSize: '4rem 4rem',
     },
     '*:focus-visible': {
       outline: '2px solid {colors.brand.green}',

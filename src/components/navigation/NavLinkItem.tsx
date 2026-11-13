@@ -22,7 +22,11 @@ const linkStyles = {
   color: 'fg',
   textDecoration: 'none',
   _hover: { bg: 'bg.muted', textDecoration: 'none' },
-  _currentPage: { bg: 'bg.muted', borderLeftColor: 'fg.highlight' },
+  _currentPage: {
+    bg: 'bg.muted',
+    borderLeftColor: 'fg.highlight',
+    roundedLeft: '0',
+  },
 } as const;
 
 function NavLinkContent({ item }: Pick<NavLinkItemProps, 'item'>) {
