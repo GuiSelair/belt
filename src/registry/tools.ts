@@ -5,10 +5,10 @@ export const tools: readonly ToolDefinition[] = [
     id: 'json-beautify',
     name: 'JSON Beautify',
     description:
-      'Format or minify JSON with your preferred indentation, without losing big-number precision.',
+      'Format JSON with your preferred indentation, without losing big-number precision.',
     groupId: 'beautify',
     href: '/beautify/json',
-    relatedToolIds: ['json-validation'],
+    relatedToolIds: ['json-minify', 'json-validation'],
   },
   {
     id: 'jsx-beautify',
@@ -28,13 +28,22 @@ export const tools: readonly ToolDefinition[] = [
     relatedToolIds: ['xml-validation', 'xml-to-xsd'],
   },
   {
+    id: 'json-minify',
+    name: 'JSON Minify',
+    description:
+      'Strip every optional whitespace from JSON, without losing big-number precision.',
+    groupId: 'minify',
+    href: '/minify/json',
+    relatedToolIds: ['json-beautify', 'json-validation'],
+  },
+  {
     id: 'json-validation',
     name: 'JSON Validation',
     description:
       'Check whether JSON is valid and jump straight to the line and column that breaks it.',
     groupId: 'validation',
     href: '/validation/json',
-    relatedToolIds: ['json-beautify'],
+    relatedToolIds: ['json-beautify', 'json-minify'],
   },
   {
     id: 'xml-validation',

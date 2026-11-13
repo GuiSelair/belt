@@ -1,12 +1,13 @@
 import type { Route } from 'next';
 
 export type ToolGroupId =
-  'beautify' | 'validation' | 'transformations' | 'helpers';
+  'beautify' | 'minify' | 'validation' | 'transformations' | 'helpers';
 
 export type ToolId =
   | 'json-beautify'
   | 'jsx-beautify'
   | 'xml-beautify'
+  | 'json-minify'
   | 'json-validation'
   | 'xml-validation'
   | 'xml-to-xsd'
@@ -30,13 +31,11 @@ export interface ExternalLink {
   id: string;
   name: string;
   href: string;
-  description: string;
 }
 
 interface NavItemBase {
   id: string;
   label: string;
-  description: string;
 }
 
 export type NavItem =

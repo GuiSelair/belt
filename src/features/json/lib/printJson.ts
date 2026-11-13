@@ -1,20 +1,13 @@
-import type { JsonEntry, JsonNode } from './types';
+import type { JsonNode } from './types';
 
 export interface PrintJsonOptions {
   /** Indentation unit. An empty string produces minified output. */
   indent: string;
-  sortKeys: boolean;
-}
-
-function compareKeys(left: JsonEntry, right: JsonEntry) {
-  if (left.key < right.key) return -1;
-  if (left.key > right.key) return 1;
-  return 0;
 }
 
 export function printJson(
   node: JsonNode,
-  { indent, sortKeys }: PrintJsonOptions,
+  { indent }: PrintJsonOptions,
 ): string {
   const parts: string[] = [];
   const isPretty = indent.length > 0;
@@ -48,10 +41,7 @@ export function printJson(
   function print(current: JsonNode, depth: number) {
     switch (current.kind) {
       case 'object': {
-        const entries = sortKeys
-          ? [...current.entries].sort(compareKeys)
-          : current.entries;
-        printList('{', '}', entries, depth, (entry) => {
+        printList('{', '}', current.entries, depth, (entry) => {
           parts.push(entry.rawKey, keySeparator);
           print(entry.value, depth + 1);
         });

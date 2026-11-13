@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { formatJson } from './formatJson';
 
-function format(text: string, indent = '  ', sortKeys = false) {
-  const result = formatJson({ text, indent, sortKeys });
+function format(text: string, indent = '  ') {
+  const result = formatJson({ text, indent });
   if (!result.ok) throw new Error(result.error.message);
   return result.output;
 }
@@ -32,14 +32,8 @@ describe('formatJson', () => {
     );
   });
 
-  it('sorts keys recursively while keeping array order', () => {
-    expect(format('{"b":1,"a":{"d":1,"c":2},"z":[3,1]}', '', true)).toBe(
-      '{"a":{"c":2,"d":1},"b":1,"z":[3,1]}',
-    );
-  });
-
   it('returns the parse error for invalid input', () => {
-    const result = formatJson({ text: '[1,', indent: '  ', sortKeys: false });
+    const result = formatJson({ text: '[1,', indent: '  ' });
 
     expect(result.ok).toBe(false);
   });

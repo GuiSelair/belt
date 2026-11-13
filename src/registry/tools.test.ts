@@ -36,6 +36,8 @@ describe('tool registry', () => {
 
     expect(relatedIds('json-validation')).toContain('json-beautify');
     expect(relatedIds('json-beautify')).toContain('json-validation');
+    expect(relatedIds('json-beautify')).toContain('json-minify');
+    expect(relatedIds('json-minify')).toContain('json-beautify');
     expect(relatedIds('xml-validation')).toContain('xml-beautify');
     expect(relatedIds('xml-beautify')).toContain('xml-validation');
   });
