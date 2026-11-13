@@ -28,6 +28,9 @@
 - **2026-11-12** — Project renamed to **Belt** (from "utility belt"); folder stays `~/Documents/kanivete`. Brand font: Unbounded 900 (self-hosted via `next/font`).
 - **2026-11-12** — Home: blue grid background covers the whole page (via `body:has([data-home-hero])`), header solid brand blue. Other pages use a softer navy scale (`#172255` base); header has no bottom divider.
 - **2026-11-12** — Footer on every page with a GitHub link (`siteConfig.repositoryUrl`, placeholder until the remote exists).
+- **2026-11-12** — Tools run on demand: a green run button (Beautify / Minify / Validate / Generate) replaces live processing; the sample is the editor's initial value ("Load sample" removed). XSD download removed.
+- **2026-11-12** — Grid background on every page (`--grid-line`: white on home, faint navy elsewhere); home title in brand green.
+- **2026-11-12** — Form fields show validation errors only after blur (no error state on first load).
 - **2026-11-12** — Connection string: empty port = engine default; Oracle URI omits credentials; Redis allows password-only userinfo.
 
 ## Blockers
