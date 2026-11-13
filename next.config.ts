@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@chakra-ui/react'],
   },
+  turbopack: {
+    resolveAlias: {
+      'node:fs/promises': { browser: './src/lib/shims/fsPromises.ts' },
+    },
+  },
 };
 
 export default nextConfig;
