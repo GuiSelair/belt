@@ -1,11 +1,14 @@
 # Belt
 
-The developer's Swiss army knife: a 100% client-side toolbox that runs
-entirely in the browser. Nothing you paste is stored or sent anywhere.
+![Home do Belt](.github/cover.png)
 
-## Tools
+O canivete suíço do desenvolvedor: uma caixa de ferramentas 100% client-side
+que roda inteiramente no navegador. Nada do que você cola é armazenado ou
+enviado para qualquer lugar.
 
-| Group           | Tool                      | Route                         |
+## Ferramentas
+
+| Grupo           | Ferramenta                | Rota                          |
 | --------------- | ------------------------- | ----------------------------- |
 | Beautify        | JSON Beautify             | `/beautify/json`              |
 | Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`               |
@@ -16,26 +19,27 @@ entirely in the browser. Nothing you paste is stored or sent anywhere.
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
 | Helpers         | Connection String Builder | `/helpers/connection-string`  |
 
-The header also links to [transform.tools](https://transform.tools) and
-[webhook.cool](https://webhook.cool). Each tool does one job and links to
-its related tools (for example, JSON Validation links to JSON Beautify).
+O header também tem links para [transform.tools](https://transform.tools) e
+[webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e
+aponta para as ferramentas relacionadas (por exemplo, JSON Validation aponta
+para JSON Beautify).
 
 ## Stack
 
 Next.js 16 (App Router, static export), React 19, TypeScript, Chakra UI 3,
-CodeMirror 6, Web Workers for heavy processing, Vitest + Testing Library.
+CodeMirror 6, Web Workers para processamento pesado, Vitest + Testing Library.
 
-## Running locally
+## Rodando localmente
 
-Requires Node.js 24.
+Requer Node.js 24.
 
 ```bash
 npm install
 npm run dev          # http://localhost:3000
 ```
 
-To run the production build, export the static site and serve the `out`
-folder with any static file server:
+Para rodar o build de produção, exporte o site estático e sirva a pasta `out`
+com qualquer servidor de arquivos estáticos:
 
 ```bash
 npm run build
@@ -44,31 +48,31 @@ npx serve out
 
 ## Scripts
 
-| Script              | Description                   |
-| ------------------- | ----------------------------- |
-| `npm run dev`       | Development server            |
-| `npm run build`     | Static export to `out/`       |
-| `npm run lint`      | ESLint                        |
-| `npm run typecheck` | Route type generation + `tsc` |
-| `npm test`          | Unit and component tests      |
-| `npm run format`    | Prettier                      |
+| Script              | Descrição                          |
+| ------------------- | ---------------------------------- |
+| `npm run dev`       | Servidor de desenvolvimento        |
+| `npm run build`     | Static export para `out/`          |
+| `npm run lint`      | ESLint                             |
+| `npm run typecheck` | Geração de tipos das rotas + `tsc` |
+| `npm test`          | Testes unitários e de componentes  |
+| `npm run format`    | Prettier                           |
 
-XSD tests validate the generated schemas with `xmllint` when it is installed
-(it ships with macOS).
+Os testes de XSD validam os schemas gerados com o `xmllint` quando ele está
+instalado (já vem no macOS).
 
-## Project structure
+## Estrutura do projeto
 
 ```text
 src/
-  app/            routes (thin pages that render a feature screen)
-  components/     shared UI: navigation, editor, tool layout, form fields
-  features/       one folder per tool: lib (pure logic), workers, screens
-  lib/            shared hooks and the Web Worker client
-  registry/       tools, groups and external links (single source of truth)
-  theme/          Chakra system: tokens and semantic tokens
+  app/            rotas (páginas enxutas que renderizam a tela de uma feature)
+  components/     UI compartilhada: navegação, editor, layout de ferramenta, campos de formulário
+  features/       uma pasta por ferramenta: lib (lógica pura), workers, telas
+  lib/            hooks compartilhados e o client de Web Worker
+  registry/       ferramentas, grupos e links externos (fonte única da verdade)
+  theme/          system do Chakra: tokens e semantic tokens
 ```
 
-Specs, designs and decisions live in `.specs/`.
+Specs, designs e decisões ficam em `.specs/`.
 
-To add a tool, create its feature folder and route, then add one entry to
-`src/registry/tools.ts`; the menu picks it up automatically.
+Para adicionar uma ferramenta, crie a pasta da feature e a rota, depois adicione
+uma entrada em `src/registry/tools.ts`; o menu a inclui automaticamente.
