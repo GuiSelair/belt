@@ -71,6 +71,14 @@ export const tools: readonly ToolDefinition[] = [
     groupId: 'helpers',
     href: '/helpers/connection-string',
   },
+  {
+    id: 'jwt-decoder',
+    name: 'JWT Decoder',
+    description:
+      'Read the header and claims of a JWT, with readable dates and expiry status.',
+    groupId: 'helpers',
+    href: '/helpers/jwt-decoder',
+  },
 ];
 
 export function getTool(id: ToolId): ToolDefinition {
