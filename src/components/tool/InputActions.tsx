@@ -1,23 +1,35 @@
 'use client';
 
 import { Button } from '@chakra-ui/react';
-import { Eraser, FileCode } from 'lucide-react';
+import { Eraser, Play } from 'lucide-react';
 
 interface InputActionsProps {
-  onLoadSample(): void;
+  runLabel: string;
+  canRun: boolean;
+  onRun(): void;
   onClear(): void;
 }
 
-export function InputActions({ onLoadSample, onClear }: InputActionsProps) {
+export function InputActions({
+  runLabel,
+  canRun,
+  onRun,
+  onClear,
+}: InputActionsProps) {
   return (
     <>
-      <Button size="sm" variant="outline" onClick={onLoadSample}>
-        <FileCode aria-hidden="true" />
-        Load sample
-      </Button>
       <Button size="sm" variant="ghost" onClick={onClear}>
         <Eraser aria-hidden="true" />
         Clear
+      </Button>
+      <Button
+        size="sm"
+        colorPalette="accent"
+        onClick={onRun}
+        disabled={!canRun}
+      >
+        <Play aria-hidden="true" />
+        {runLabel}
       </Button>
     </>
   );

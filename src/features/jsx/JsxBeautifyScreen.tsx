@@ -32,13 +32,14 @@ export function JsxBeautifyScreen() {
     handleTabWidthChange,
     handleTrailingCommaChange,
     output,
+    canRun,
     isStale,
     processingLabel,
     syntaxError,
     taskError,
     diagnostics,
     inputEditorRef,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
   } = useJsxBeautifyScreen();
@@ -93,7 +94,9 @@ export function JsxBeautifyScreen() {
           title="Input"
           actions={
             <InputActions
-              onLoadSample={handleLoadSample}
+              runLabel="Beautify"
+              canRun={canRun}
+              onRun={handleRun}
               onClear={handleClear}
             />
           }

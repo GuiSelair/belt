@@ -3,20 +3,18 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
-import { useDebouncedValue } from '@/lib/useDebouncedValue';
 
 import { validateXml } from '../lib/validateXml';
 import { XML_SAMPLE, toXmlDiagnostic } from '../xmlShared';
 
 export function useXmlValidationScreen() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(XML_SAMPLE);
+  const [submitted, setSubmitted] = useState<string | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
-  const debouncedInput = useDebouncedValue(input);
-  const isEmpty = input.trim() === '' || debouncedInput.trim() === '';
 
   const validation = useMemo(
-    () => (isEmpty ? null : validateXml(debouncedInput)),
-    [isEmpty, debouncedInput],
+    () => (submitted === null ? null : validateXml(submitted)),
+    [submitted],
   );
   const syntaxError = validation && !validation.ok ? validation.error : null;
   const summary = validation?.ok ? validation.summary : null;
@@ -26,23 +24,26 @@ export function useXmlValidationScreen() {
     [syntaxError],
   );
 
+  const handleRun = useCallback(() => setSubmitted(input), [input]);
+  const handleClear = useCallback(() => {
+    setInput('');
+    setSubmitted(null);
+  }, []);
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
   }, [syntaxError]);
-
-  const handleLoadSample = useCallback(() => setInput(XML_SAMPLE), []);
-  const handleClear = useCallback(() => setInput(''), []);
 
   return {
     input,
     setInput,
     inputEditorRef,
     diagnostics,
-    isEmpty,
+    canRun: input.trim() !== '',
+    hasRun: submitted !== null,
     summary,
     syntaxError,
+    handleRun,
     handleGoToError,
-    handleLoadSample,
     handleClear,
   };
 }

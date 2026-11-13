@@ -25,10 +25,11 @@ export function XmlBeautifyScreen() {
     diagnostics,
     output,
     notices,
+    canRun,
     isStale,
     syntaxError,
+    handleRun,
     handleGoToError,
-    handleLoadSample,
     handleClear,
   } = useXmlBeautifyScreen();
 
@@ -61,7 +62,9 @@ export function XmlBeautifyScreen() {
           title="Input"
           actions={
             <InputActions
-              onLoadSample={handleLoadSample}
+              runLabel="Beautify"
+              canRun={canRun}
+              onRun={handleRun}
               onClear={handleClear}
             />
           }

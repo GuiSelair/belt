@@ -24,6 +24,7 @@ export function JsonBeautifyScreen() {
       </ToolToolbar>
       <JsonFormatterView
         formatter={formatter}
+        runLabel="Beautify"
         outputLabel="Formatted JSON output"
         processingLabel="Formatting…"
       />

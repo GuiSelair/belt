@@ -13,12 +13,14 @@ import type { JsonFormatter } from './useJsonFormatter';
 
 interface JsonFormatterViewProps {
   formatter: JsonFormatter;
+  runLabel: string;
   outputLabel: string;
   processingLabel: string;
 }
 
 export function JsonFormatterView({
   formatter,
+  runLabel,
   outputLabel,
   processingLabel,
 }: JsonFormatterViewProps) {
@@ -26,13 +28,14 @@ export function JsonFormatterView({
     input,
     setInput,
     output,
+    canRun,
     isStale,
     isProcessingInWorker,
     syntaxError,
     taskError,
     diagnostics,
     inputEditorRef,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
   } = formatter;
@@ -57,7 +60,9 @@ export function JsonFormatterView({
           title="Input"
           actions={
             <InputActions
-              onLoadSample={handleLoadSample}
+              runLabel={runLabel}
+              canRun={canRun}
+              onRun={handleRun}
               onClear={handleClear}
             />
           }

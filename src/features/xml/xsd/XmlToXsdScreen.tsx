@@ -1,7 +1,6 @@
 'use client';
 
-import { Button, Stack } from '@chakra-ui/react';
-import { Download } from 'lucide-react';
+import { Stack } from '@chakra-ui/react';
 
 import { CodeEditor } from '@/components/editor/CodeEditor';
 import { SegmentedField } from '@/components/form/SegmentedField';
@@ -33,15 +32,15 @@ export function XmlToXsdScreen() {
     diagnostics,
     xsd,
     notices,
+    canRun,
     syntaxError,
     taskError,
     isStale,
     isGenerating,
     isLargeInput,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
-    handleDownload,
   } = useXmlToXsdScreen();
 
   return (
@@ -89,7 +88,9 @@ export function XmlToXsdScreen() {
           title="XML input"
           actions={
             <InputActions
-              onLoadSample={handleLoadSample}
+              runLabel="Generate"
+              canRun={canRun}
+              onRun={handleRun}
               onClear={handleClear}
             />
           }
@@ -111,15 +112,6 @@ export function XmlToXsdScreen() {
             <>
               {isGenerating && <ProcessingIndicator label="Generating…" />}
               <CopyButton value={xsd} />
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={handleDownload}
-                disabled={xsd === ''}
-              >
-                <Download aria-hidden="true" />
-                Download
-              </Button>
             </>
           }
         >

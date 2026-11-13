@@ -4,8 +4,6 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import type { SelectOption } from '@/components/form/SelectField';
-import { downloadText } from '@/lib/downloadText';
-import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
 import { useWorkerTask } from '@/lib/worker/useWorkerTask';
@@ -38,16 +36,11 @@ function createXsdWorker() {
 }
 
 export function useXmlToXsdScreen() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(XML_SAMPLE);
   const [style, setStyle] = useState<XsdStyle>('russian-doll');
   const [compositor, setCompositor] = useState<XsdCompositor>('sequence');
+  const [request, setRequest] = useState<GenerateXsdRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
-  const debouncedInput = useDebouncedValue(input);
-
-  const request = useMemo<GenerateXsdRequest | null>(() => {
-    if (input.trim() === '' || debouncedInput.trim() === '') return null;
-    return { text: debouncedInput, style, compositor };
-  }, [input, debouncedInput, style, compositor]);
 
   const runGenerate = useWorkerTask<GenerateXsdRequest, GenerateXsdResult>(
     createXsdWorker,
@@ -66,14 +59,16 @@ export function useXmlToXsdScreen() {
     [syntaxError],
   );
 
-  const handleLoadSample = useCallback(() => setInput(XML_SAMPLE), []);
-  const handleClear = useCallback(() => setInput(''), []);
+  const handleRun = useCallback(() => {
+    setRequest({ text: input, style, compositor });
+  }, [input, style, compositor]);
+  const handleClear = useCallback(() => {
+    setInput('');
+    setRequest(null);
+  }, []);
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
   }, [syntaxError]);
-  const handleDownload = useCallback(() => {
-    downloadText('schema.xsd', xsd, 'application/xml');
-  }, [xsd]);
 
   return {
     input,
@@ -86,14 +81,14 @@ export function useXmlToXsdScreen() {
     diagnostics,
     xsd,
     notices,
+    canRun: input.trim() !== '',
     syntaxError,
     taskError,
     isStale: syntaxError !== null && xsd !== '',
     isGenerating: isPending && request !== null,
     isLargeInput: input.length > LARGE_INPUT_CHARACTERS,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
-    handleDownload,
   };
 }

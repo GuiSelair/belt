@@ -12,6 +12,7 @@ export function JsonMinifyScreen() {
     <Stack gap="6">
       <JsonFormatterView
         formatter={formatter}
+        runLabel="Minify"
         outputLabel="Minified JSON output"
         processingLabel="Minifying…"
       />

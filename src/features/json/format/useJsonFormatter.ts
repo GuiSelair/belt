@@ -3,7 +3,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
-import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
 import {
@@ -31,14 +30,9 @@ const workerOptions: WorkerTaskOptions<FormatJsonRequest, FormatJsonResult> = {
 
 /** `indent` is the indentation unit; an empty string minifies. */
 export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(sample);
+  const [request, setRequest] = useState<FormatJsonRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
-  const debouncedInput = useDebouncedValue(input);
-
-  const request = useMemo<FormatJsonRequest | null>(() => {
-    if (input.trim() === '' || debouncedInput.trim() === '') return null;
-    return { text: debouncedInput, indent };
-  }, [input, debouncedInput, indent]);
 
   const runFormat = useWorkerTask(createFormatWorker, workerOptions);
   const { outcome, isPending } = useLatestTask(runFormat, request);
@@ -55,8 +49,13 @@ export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
     [syntaxError],
   );
 
-  const handleLoadSample = useCallback(() => setInput(sample), [sample]);
-  const handleClear = useCallback(() => setInput(''), []);
+  const handleRun = useCallback(() => {
+    setRequest({ text: input, indent });
+  }, [input, indent]);
+  const handleClear = useCallback(() => {
+    setInput('');
+    setRequest(null);
+  }, []);
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
   }, [syntaxError]);
@@ -65,13 +64,14 @@ export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
     input,
     setInput,
     output,
+    canRun: input.trim() !== '',
     isStale: syntaxError !== null && output !== '',
     isProcessingInWorker: isPending && request !== null && isLargeJson(request),
     syntaxError,
     taskError,
     diagnostics,
     inputEditorRef,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
   };

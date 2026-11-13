@@ -3,7 +3,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
-import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useLatestTask } from '@/lib/useLatestTask';
 import {
   useWorkerTask,
@@ -28,11 +27,9 @@ const workerOptions: WorkerTaskOptions<string, ValidateJsonResult> = {
 const NO_WARNINGS: JsonPositionedMessage[] = [];
 
 export function useJsonValidationScreen() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(JSON_SAMPLE);
+  const [request, setRequest] = useState<string | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
-  const debouncedInput = useDebouncedValue(input);
-  const request =
-    input.trim() === '' || debouncedInput.trim() === '' ? null : debouncedInput;
 
   const runValidation = useWorkerTask(createValidateWorker, workerOptions);
   const { outcome, isPending } = useLatestTask(runValidation, request);
@@ -56,15 +53,19 @@ export function useJsonValidationScreen() {
     if (syntaxError) goTo(syntaxError.offset);
   }, [goTo, syntaxError]);
 
-  const handleLoadSample = useCallback(() => setInput(JSON_SAMPLE), []);
-  const handleClear = useCallback(() => setInput(''), []);
+  const handleRun = useCallback(() => setRequest(input), [input]);
+  const handleClear = useCallback(() => {
+    setInput('');
+    setRequest(null);
+  }, []);
 
   return {
     input,
     setInput,
     inputEditorRef,
     diagnostics,
-    isEmpty: request === null,
+    canRun: input.trim() !== '',
+    hasRun: request !== null,
     isValidating: isPending && outcome === null,
     summary,
     warnings,
@@ -72,7 +73,7 @@ export function useJsonValidationScreen() {
     taskError,
     goTo,
     handleGoToError,
-    handleLoadSample,
+    handleRun,
     handleClear,
   };
 }

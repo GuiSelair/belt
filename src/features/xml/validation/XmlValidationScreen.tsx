@@ -16,11 +16,12 @@ export function XmlValidationScreen() {
     setInput,
     inputEditorRef,
     diagnostics,
-    isEmpty,
+    canRun,
+    hasRun,
     summary,
     syntaxError,
+    handleRun,
     handleGoToError,
-    handleLoadSample,
     handleClear,
   } = useXmlValidationScreen();
 
@@ -29,7 +30,12 @@ export function XmlValidationScreen() {
       <EditorPanel
         title="Input"
         actions={
-          <InputActions onLoadSample={handleLoadSample} onClear={handleClear} />
+          <InputActions
+            runLabel="Validate"
+            canRun={canRun}
+            onRun={handleRun}
+            onClear={handleClear}
+          />
         }
       >
         <CodeEditor
@@ -43,9 +49,9 @@ export function XmlValidationScreen() {
         />
       </EditorPanel>
       <EditorPanel title="Result">
-        {isEmpty && (
-          <StatusMessage tone="info" title="Waiting for input">
-            Paste XML on the left to check whether it is well-formed.
+        {!hasRun && (
+          <StatusMessage tone="info" title="Ready to validate">
+            Paste XML on the left and click Validate.
           </StatusMessage>
         )}
         {syntaxError && (

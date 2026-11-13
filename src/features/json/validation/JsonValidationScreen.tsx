@@ -20,7 +20,8 @@ export function JsonValidationScreen() {
     setInput,
     inputEditorRef,
     diagnostics,
-    isEmpty,
+    canRun,
+    hasRun,
     isValidating,
     summary,
     warnings,
@@ -28,7 +29,7 @@ export function JsonValidationScreen() {
     taskError,
     goTo,
     handleGoToError,
-    handleLoadSample,
+    handleRun,
     handleClear,
   } = useJsonValidationScreen();
 
@@ -37,7 +38,12 @@ export function JsonValidationScreen() {
       <EditorPanel
         title="Input"
         actions={
-          <InputActions onLoadSample={handleLoadSample} onClear={handleClear} />
+          <InputActions
+            runLabel="Validate"
+            canRun={canRun}
+            onRun={handleRun}
+            onClear={handleClear}
+          />
         }
       >
         <CodeEditor
@@ -52,9 +58,9 @@ export function JsonValidationScreen() {
       </EditorPanel>
       <EditorPanel title="Result">
         <Stack gap="4">
-          {isEmpty && (
-            <StatusMessage tone="info" title="Waiting for input">
-              Paste JSON on the left to check whether it is valid.
+          {!hasRun && (
+            <StatusMessage tone="info" title="Ready to validate">
+              Paste JSON on the left and click Validate.
             </StatusMessage>
           )}
           {isValidating && <ProcessingIndicator label="Validating…" />}

@@ -7,7 +7,6 @@ import type {
   EditorDiagnostic,
 } from '@/components/editor/CodeEditor';
 import type { SelectOption } from '@/components/form/SelectField';
-import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
 import {
@@ -65,16 +64,11 @@ const workerOptions: WorkerTaskOptions<FormatJsxRequest, FormatJsxResult> = {
 };
 
 export function useJsxBeautifyScreen() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(JSX_SAMPLE);
   const [options, setOptions] = useState(defaultJsxFormatOptions);
+  const [request, setRequest] = useState<FormatJsxRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
-  const debouncedInput = useDebouncedValue(input);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
-
-  const request = useMemo<FormatJsxRequest | null>(() => {
-    if (input.trim() === '' || debouncedInput.trim() === '') return null;
-    return { code: debouncedInput, options };
-  }, [input, debouncedInput, options]);
 
   const runFormat = useWorkerTask(createFormatWorker, workerOptions);
   const { outcome, isPending } = useLatestTask(runFormat, request);
@@ -121,8 +115,13 @@ export function useJsxBeautifyScreen() {
     (value: TrailingCommaOption) => setOption('trailingComma', value),
     [setOption],
   );
-  const handleLoadSample = useCallback(() => setInput(JSX_SAMPLE), []);
-  const handleClear = useCallback(() => setInput(''), []);
+  const handleRun = useCallback(() => {
+    setRequest({ code: input, options });
+  }, [input, options]);
+  const handleClear = useCallback(() => {
+    setInput('');
+    setRequest(null);
+  }, []);
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
   }, [syntaxError]);
@@ -136,6 +135,7 @@ export function useJsxBeautifyScreen() {
     handleTabWidthChange,
     handleTrailingCommaChange,
     output,
+    canRun: input.trim() !== '',
     isStale: syntaxError !== null && output !== '',
     processingLabel: isPending
       ? hasLoadedOnce
@@ -146,7 +146,7 @@ export function useJsxBeautifyScreen() {
     taskError,
     diagnostics,
     inputEditorRef,
-    handleLoadSample,
+    handleRun,
     handleClear,
     handleGoToError,
   };
