@@ -22,7 +22,7 @@ export function JsonSummaryList({ summary }: JsonSummaryListProps) {
   ];
 
   return (
-    <DataList.Root orientation="horizontal">
+    <DataList.Root orientation="horizontal" size="sm" gap="1.5">
       {rows.map((row) => (
         <DataList.Item key={row.label}>
           <DataList.ItemLabel color="fg.muted">{row.label}</DataList.ItemLabel>
