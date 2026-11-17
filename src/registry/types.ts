@@ -10,9 +10,12 @@ export type ToolId =
   | 'json-minify'
   | 'json-validation'
   | 'xml-validation'
+  | 'sql-validation'
   | 'xml-to-xsd'
   | 'sql-aliases'
-  | 'connection-string';
+  | 'connection-string'
+  | 'wsdl-inspector'
+  | 'jwt-decoder';
 
 export interface ToolGroup {
   id: ToolGroupId;
