@@ -12,6 +12,7 @@ export type ToolId =
   | 'xml-validation'
   | 'sql-validation'
   | 'xml-to-xsd'
+  | 'sql-aliases'
   | 'connection-string'
   | 'wsdl-inspector'
   | 'jwt-decoder';
