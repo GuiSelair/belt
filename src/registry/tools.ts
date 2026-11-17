@@ -80,6 +80,15 @@ export const tools: readonly ToolDefinition[] = [
     href: '/helpers/connection-string',
   },
   {
+    id: 'wsdl-inspector',
+    name: 'WSDL Inspector',
+    description:
+      'Read a SOAP WSDL: bindings, operations, endpoint URLs and a sample request envelope for each operation.',
+    groupId: 'helpers',
+    href: '/helpers/wsdl-inspector',
+    relatedToolIds: ['xml-beautify', 'xml-validation'],
+  },
+  {
     id: 'jwt-decoder',
     name: 'JWT Decoder',
     description:

@@ -13,6 +13,7 @@ export type ToolId =
   | 'sql-validation'
   | 'xml-to-xsd'
   | 'connection-string'
+  | 'wsdl-inspector'
   | 'jwt-decoder';
 
 export interface ToolGroup {

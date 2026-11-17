@@ -19,6 +19,7 @@ enviado para qualquer lugar.
 | Validation      | SQL Validation            | `/validation/sql`             |
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd` |
 | Helpers         | Connection String Builder | `/helpers/connection-string`  |
+| Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`     |
 | Helpers         | JWT Decoder               | `/helpers/jwt-decoder`        |
 
 O header também tem links para [transform.tools](https://transform.tools) e
