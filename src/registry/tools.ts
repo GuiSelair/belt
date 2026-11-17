@@ -55,6 +55,14 @@ export const tools: readonly ToolDefinition[] = [
     relatedToolIds: ['xml-beautify', 'xml-to-xsd'],
   },
   {
+    id: 'sql-validation',
+    name: 'SQL Validation',
+    description:
+      'Check SQL syntax for PostgreSQL, MySQL, Oracle, ClickHouse or SQL Server and compare dialects.',
+    groupId: 'validation',
+    href: '/validation/sql',
+  },
+  {
     id: 'xml-to-xsd',
     name: 'XML to XSD',
     description:
@@ -79,6 +87,14 @@ export const tools: readonly ToolDefinition[] = [
     groupId: 'helpers',
     href: '/helpers/wsdl-inspector',
     relatedToolIds: ['xml-beautify', 'xml-validation'],
+  },
+  {
+    id: 'jwt-decoder',
+    name: 'JWT Decoder',
+    description:
+      'Read the header and claims of a JWT, with readable dates and expiry status.',
+    groupId: 'helpers',
+    href: '/helpers/jwt-decoder',
   },
 ];
 

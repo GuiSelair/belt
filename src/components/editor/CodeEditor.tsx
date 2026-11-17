@@ -34,6 +34,7 @@ interface CodeEditorProps {
   readOnly?: boolean;
   diagnostics?: readonly EditorDiagnostic[];
   placeholder?: string;
+  minHeight?: string;
   ref?: Ref<CodeEditorHandle>;
 }
 
@@ -61,6 +62,7 @@ export function CodeEditor({
   readOnly = false,
   diagnostics = NO_DIAGNOSTICS,
   placeholder,
+  minHeight = '24rem',
   ref,
 }: CodeEditorProps) {
   const viewRef = useRef<EditorView | null>(null);
@@ -110,7 +112,7 @@ export function CodeEditor({
       rounded="lg"
       overflow="hidden"
       css={{
-        '& .cm-editor': { minHeight: '24rem', maxHeight: '70vh' },
+        '& .cm-editor': { minHeight, maxHeight: '70vh' },
         '& .cm-editor.cm-focused': { outline: 'none' },
         '&:focus-within': {
           outline: '2px solid var(--chakra-colors-brand-green)',
