@@ -31,7 +31,8 @@ para JSON Beautify).
 ## Stack
 
 Next.js 16 (App Router, static export), React 19, TypeScript, Chakra UI 3,
-CodeMirror 6, Web Workers para processamento pesado, Vitest + Testing Library.
+CodeMirror 6, um único Web Worker que executa o processamento de todas as
+ferramentas (inclusive o parser de SQL em WASM), Vitest + Testing Library.
 
 ## Rodando localmente
 
@@ -70,11 +71,14 @@ instalado (já vem no macOS).
 src/
   app/            rotas (páginas enxutas que renderizam a tela de uma feature)
   components/     UI compartilhada: navegação, editor, layout de ferramenta, campos de formulário
-  features/       uma pasta por ferramenta: lib (lógica pura), workers, telas
-  lib/            hooks compartilhados e o client de Web Worker
+  features/       uma pasta por ferramenta: lib (lógica pura) e telas
+  lib/            hooks compartilhados, client e dispatcher do Web Worker
   registry/       ferramentas, grupos e links externos (fonte única da verdade)
+  tasks/          tabela de tarefas e o worker único que as executa
   theme/          system do Chakra: tokens e semantic tokens
 ```
 
 Para adicionar uma ferramenta, crie a pasta da feature e a rota, depois adicione
-uma entrada em `src/registry/tools.ts`; o menu a inclui automaticamente.
+uma entrada em `src/registry/tools.ts`; o menu a inclui automaticamente. Se ela
+processa algo ao clicar, registre a função pura em `src/tasks/taskLoaders.ts` e
+chame-a pela tela com `createTask`, para que rode no worker.
