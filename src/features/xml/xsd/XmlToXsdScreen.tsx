@@ -8,7 +8,6 @@ import { SelectField } from '@/components/form/SelectField';
 import { CopyButton } from '@/components/tool/CopyButton';
 import { EditorPanel } from '@/components/tool/EditorPanel';
 import { InputActions } from '@/components/tool/InputActions';
-import { ProcessingIndicator } from '@/components/tool/ProcessingIndicator';
 import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
@@ -36,7 +35,7 @@ export function XmlToXsdScreen() {
     syntaxError,
     taskError,
     isStale,
-    isGenerating,
+    isRunning,
     isLargeInput,
     handleRun,
     handleClear,
@@ -92,6 +91,8 @@ export function XmlToXsdScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel="Generating…"
             />
           }
         >
@@ -108,12 +109,7 @@ export function XmlToXsdScreen() {
         <EditorPanel
           title="XSD output"
           isStale={isStale}
-          actions={
-            <>
-              {isGenerating && <ProcessingIndicator label="Generating…" />}
-              <CopyButton value={xsd} />
-            </>
-          }
+          actions={<CopyButton value={xsd} />}
         >
           <CodeEditor
             label="Generated XSD output"

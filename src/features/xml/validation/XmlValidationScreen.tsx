@@ -18,8 +18,10 @@ export function XmlValidationScreen() {
     diagnostics,
     canRun,
     hasRun,
+    isRunning,
     summary,
     syntaxError,
+    taskError,
     handleRun,
     handleGoToError,
     handleClear,
@@ -35,6 +37,8 @@ export function XmlValidationScreen() {
             canRun={canRun}
             onRun={handleRun}
             onClear={handleClear}
+            isRunning={isRunning}
+            runningLabel="Validating…"
           />
         }
       >
@@ -52,6 +56,11 @@ export function XmlValidationScreen() {
         {!hasRun && (
           <StatusMessage tone="info" title="Ready to validate">
             Paste XML on the left and click Validate.
+          </StatusMessage>
+        )}
+        {taskError && (
+          <StatusMessage tone="error" title="Validation failed">
+            {taskError}
           </StatusMessage>
         )}
         {syntaxError && (

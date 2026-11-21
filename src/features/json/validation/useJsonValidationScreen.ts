@@ -4,25 +4,12 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import { useLatestTask } from '@/lib/useLatestTask';
-import {
-  useWorkerTask,
-  type WorkerTaskOptions,
-} from '@/lib/worker/useWorkerTask';
+import { createTask } from '@/tasks/createTask';
 
 import type { JsonPositionedMessage } from '../lib/types';
-import { validateJson, type ValidateJsonResult } from '../lib/validateJson';
-import { JSON_SAMPLE, isLargeJson, toDiagnostic } from '../jsonShared';
+import { JSON_SAMPLE, toDiagnostic } from '../jsonShared';
 
-function createValidateWorker() {
-  return new Worker(
-    new URL('../workers/validateJson.worker.ts', import.meta.url),
-    { type: 'module' },
-  );
-}
-
-const workerOptions: WorkerTaskOptions<string, ValidateJsonResult> = {
-  inline: { when: (text) => !isLargeJson({ text }), run: validateJson },
-};
+const validateJsonTask = createTask('validateJson');
 
 const NO_WARNINGS: JsonPositionedMessage[] = [];
 
@@ -31,8 +18,7 @@ export function useJsonValidationScreen() {
   const [request, setRequest] = useState<string | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const runValidation = useWorkerTask(createValidateWorker, workerOptions);
-  const { outcome, isPending } = useLatestTask(runValidation, request);
+  const { outcome, isPending } = useLatestTask(validateJsonTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -66,7 +52,7 @@ export function useJsonValidationScreen() {
     diagnostics,
     canRun: input.trim() !== '',
     hasRun: request !== null,
-    isValidating: isPending && outcome === null,
+    isRunning: isPending,
     summary,
     warnings,
     syntaxError,

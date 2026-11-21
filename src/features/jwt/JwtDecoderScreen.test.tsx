@@ -18,7 +18,7 @@ describe('JwtDecoderScreen', () => {
 
     await user.click(screen.getByRole('button', { name: 'Decode' }));
 
-    expect(screen.getByText('Token is active')).toBeInTheDocument();
+    expect(await screen.findByText('Token is active')).toBeInTheDocument();
     expect(screen.getByText('HS256')).toBeInTheDocument();
     expect(screen.getByText('https://auth.belt.dev')).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Payload' })).toBeInTheDocument();
