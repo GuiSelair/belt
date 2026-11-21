@@ -8,7 +8,9 @@ import { useLatestTask } from '@/lib/useLatestTask';
 
 import type { SqlDialect } from '../lib/dialects';
 import { SQL_SAMPLE, toSqlDiagnostic } from '../sqlShared';
-import { addAliases, type AddAliasesRequest } from './lib/addAliases';
+import { addAliasesTask } from '../sqlTasks';
+import { useSqlParserWarmUp } from '../useSqlParserWarmUp';
+import type { AddAliasesRequest } from './lib/addAliases';
 
 const NO_NOTICES: string[] = [];
 
@@ -18,7 +20,8 @@ export function useSqlAliasesScreen() {
   const [request, setRequest] = useState<AddAliasesRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const { outcome, isPending } = useLatestTask(addAliases, request);
+  const isParserReady = useSqlParserWarmUp();
+  const { outcome, isPending } = useLatestTask(addAliasesTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -61,7 +64,8 @@ export function useSqlAliasesScreen() {
     syntaxError,
     taskError,
     isStale: (syntaxError !== null || taskError !== null) && output !== '',
-    isProcessing: isPending,
+    isRunning: isPending,
+    runningLabel: isParserReady ? 'Adding aliases…' : 'Loading SQL parser…',
     handleRun,
     handleClear,
     handleGoToError,
