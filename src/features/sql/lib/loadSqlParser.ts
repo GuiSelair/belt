@@ -2,11 +2,7 @@ type SqlParserModule = typeof import('@guanmingchiu/sqlparser-ts');
 
 let parserPromise: Promise<SqlParserModule> | null = null;
 
-/**
- * Loads the WASM parser on first use. It must run on the main thread: the
- * package only fetches its WASM when `window` exists, which is not the case
- * inside a Web Worker.
- */
+/** Loads and instantiates the WASM parser once, then reuses that instance. */
 export function loadSqlParser(): Promise<SqlParserModule> {
   parserPromise ??= import('@guanmingchiu/sqlparser-ts')
     .then(async (parser) => {
@@ -18,4 +14,9 @@ export function loadSqlParser(): Promise<SqlParserModule> {
       throw error;
     });
   return parserPromise;
+}
+
+export async function warmSqlParser(): Promise<null> {
+  await loadSqlParser();
+  return null;
 }
