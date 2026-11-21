@@ -6,8 +6,10 @@ import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import { useLatestTask } from '@/lib/useLatestTask';
 
 import { getSqlDialect, type SqlDialect } from '../lib/dialects';
-import { validateSql, type ValidateSqlRequest } from '../lib/validateSql';
+import type { ValidateSqlRequest } from '../lib/validateSql';
 import { SQL_SAMPLE, toSqlDiagnostic } from '../sqlShared';
+import { validateSqlTask } from '../sqlTasks';
+import { useSqlParserWarmUp } from '../useSqlParserWarmUp';
 
 export function useSqlValidationScreen() {
   const [input, setInput] = useState(SQL_SAMPLE);
@@ -15,7 +17,8 @@ export function useSqlValidationScreen() {
   const [request, setRequest] = useState<ValidateSqlRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const { outcome, isPending } = useLatestTask(validateSql, request);
+  const isParserReady = useSqlParserWarmUp();
+  const { outcome, isPending } = useLatestTask(validateSqlTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -52,7 +55,8 @@ export function useSqlValidationScreen() {
     diagnostics,
     canRun: input.trim() !== '',
     hasRun: request !== null,
-    isValidating: isPending,
+    isRunning: isPending,
+    runningLabel: isParserReady ? 'Validating…' : 'Loading SQL parser…',
     checkedDialect,
     statements,
     compatibility: result?.compatibility ?? null,

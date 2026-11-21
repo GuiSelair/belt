@@ -6,7 +6,6 @@ import { CodeEditor } from '@/components/editor/CodeEditor';
 import { SelectField } from '@/components/form/SelectField';
 import { EditorPanel } from '@/components/tool/EditorPanel';
 import { InputActions } from '@/components/tool/InputActions';
-import { ProcessingIndicator } from '@/components/tool/ProcessingIndicator';
 import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
@@ -32,7 +31,8 @@ export function SqlValidationScreen() {
     diagnostics,
     canRun,
     hasRun,
-    isValidating,
+    isRunning,
+    runningLabel,
     checkedDialect,
     statements,
     compatibility,
@@ -63,6 +63,8 @@ export function SqlValidationScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel={runningLabel}
             />
           }
         >
@@ -83,7 +85,6 @@ export function SqlValidationScreen() {
                 Pick a dialect, paste SQL on the left and click Validate.
               </StatusMessage>
             )}
-            {isValidating && <ProcessingIndicator label="Validating…" />}
             {taskError && (
               <StatusMessage tone="error" title="Validation failed">
                 {taskError}

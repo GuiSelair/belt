@@ -7,7 +7,6 @@ import { SelectField } from '@/components/form/SelectField';
 import { CopyButton } from '@/components/tool/CopyButton';
 import { EditorPanel } from '@/components/tool/EditorPanel';
 import { InputActions } from '@/components/tool/InputActions';
-import { ProcessingIndicator } from '@/components/tool/ProcessingIndicator';
 import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
@@ -30,7 +29,8 @@ export function SqlAliasesScreen() {
     syntaxError,
     taskError,
     isStale,
-    isProcessing,
+    isRunning,
+    runningLabel,
     handleRun,
     handleClear,
     handleGoToError,
@@ -74,6 +74,8 @@ export function SqlAliasesScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel={runningLabel}
             />
           }
         >
@@ -90,12 +92,7 @@ export function SqlAliasesScreen() {
         <EditorPanel
           title="SQL with aliases"
           isStale={isStale}
-          actions={
-            <>
-              {isProcessing && <ProcessingIndicator label="Processing…" />}
-              <CopyButton value={output} />
-            </>
-          }
+          actions={<CopyButton value={output} />}
         >
           <CodeEditor
             label="SQL with aliases output"

@@ -26,7 +26,7 @@ export function JsonBeautifyScreen() {
         formatter={formatter}
         runLabel="Beautify"
         outputLabel="Formatted JSON output"
-        processingLabel="Formatting…"
+        runningLabel="Formatting…"
       />
     </Stack>
   );

@@ -6,12 +6,9 @@ import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import type { SelectOption } from '@/components/form/SelectField';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
-import { useWorkerTask } from '@/lib/worker/useWorkerTask';
+import { createTask } from '@/tasks/createTask';
 
-import type {
-  GenerateXsdRequest,
-  GenerateXsdResult,
-} from '../lib/xsd/generateXsd';
+import type { GenerateXsdRequest } from '../lib/xsd/generateXsd';
 import type { XsdCompositor, XsdStyle } from '../lib/xsd/writeXsd';
 import { XML_SAMPLE, toXmlDiagnostic } from '../xmlShared';
 
@@ -28,12 +25,7 @@ export const compositorOptions: SelectOption<XsdCompositor>[] = [
   { value: 'all', label: 'Any order' },
 ];
 
-function createXsdWorker() {
-  return new Worker(
-    new URL('../workers/generateXsd.worker.ts', import.meta.url),
-    { type: 'module' },
-  );
-}
+const generateXsdTask = createTask('generateXsd');
 
 export function useXmlToXsdScreen() {
   const [input, setInput] = useState(XML_SAMPLE);
@@ -42,10 +34,7 @@ export function useXmlToXsdScreen() {
   const [request, setRequest] = useState<GenerateXsdRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const runGenerate = useWorkerTask<GenerateXsdRequest, GenerateXsdResult>(
-    createXsdWorker,
-  );
-  const { outcome, isPending } = useLatestTask(runGenerate, request);
+  const { outcome, isPending } = useLatestTask(generateXsdTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -85,7 +74,7 @@ export function useXmlToXsdScreen() {
     syntaxError,
     taskError,
     isStale: syntaxError !== null && xsd !== '',
-    isGenerating: isPending && request !== null,
+    isRunning: isPending,
     isLargeInput: input.length > LARGE_INPUT_CHARACTERS,
     handleRun,
     handleClear,

@@ -5,28 +5,12 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
-import {
-  useWorkerTask,
-  type WorkerTaskOptions,
-} from '@/lib/worker/useWorkerTask';
+import { createTask } from '@/tasks/createTask';
 
-import {
-  formatJson,
-  type FormatJsonRequest,
-  type FormatJsonResult,
-} from '../lib/formatJson';
-import { JSON_SAMPLE, isLargeJson, toDiagnostic } from '../jsonShared';
+import type { FormatJsonRequest } from '../lib/formatJson';
+import { JSON_SAMPLE, toDiagnostic } from '../jsonShared';
 
-function createFormatWorker() {
-  return new Worker(
-    new URL('../workers/formatJson.worker.ts', import.meta.url),
-    { type: 'module' },
-  );
-}
-
-const workerOptions: WorkerTaskOptions<FormatJsonRequest, FormatJsonResult> = {
-  inline: { when: (request) => !isLargeJson(request), run: formatJson },
-};
+const formatJsonTask = createTask('formatJson');
 
 /** `indent` is the indentation unit; an empty string minifies. */
 export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
@@ -34,8 +18,7 @@ export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
   const [request, setRequest] = useState<FormatJsonRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const runFormat = useWorkerTask(createFormatWorker, workerOptions);
-  const { outcome, isPending } = useLatestTask(runFormat, request);
+  const { outcome, isPending } = useLatestTask(formatJsonTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -66,7 +49,7 @@ export function useJsonFormatter(indent: string, sample = JSON_SAMPLE) {
     output,
     canRun: input.trim() !== '',
     isStale: syntaxError !== null && output !== '',
-    isProcessingInWorker: isPending && request !== null && isLargeJson(request),
+    isRunning: isPending,
     syntaxError,
     taskError,
     diagnostics,

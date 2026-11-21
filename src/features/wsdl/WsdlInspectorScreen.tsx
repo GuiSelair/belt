@@ -7,7 +7,6 @@ import { SelectField } from '@/components/form/SelectField';
 import { CopyButton } from '@/components/tool/CopyButton';
 import { EditorPanel } from '@/components/tool/EditorPanel';
 import { InputActions } from '@/components/tool/InputActions';
-import { ProcessingIndicator } from '@/components/tool/ProcessingIndicator';
 import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
@@ -23,7 +22,7 @@ export function WsdlInspectorScreen() {
     diagnostics,
     canRun,
     hasRun,
-    isInspecting,
+    isRunning,
     syntaxError,
     wsdlError,
     taskError,
@@ -73,6 +72,8 @@ export function WsdlInspectorScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel="Inspecting…"
             />
           }
         >
@@ -86,10 +87,7 @@ export function WsdlInspectorScreen() {
             placeholder="Paste a WSDL 1.1 document here…"
           />
         </EditorPanel>
-        <EditorPanel
-          title="Service details"
-          actions={isInspecting && <ProcessingIndicator label="Inspecting…" />}
-        >
+        <EditorPanel title="Service details">
           {!hasRun && (
             <StatusMessage tone="info" title="Ready to inspect">
               Paste a WSDL on the left and click Inspect.

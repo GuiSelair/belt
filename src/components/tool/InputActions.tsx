@@ -8,6 +8,8 @@ interface InputActionsProps {
   canRun: boolean;
   onRun(): void;
   onClear(): void;
+  isRunning?: boolean;
+  runningLabel?: string;
 }
 
 export function InputActions({
@@ -15,6 +17,8 @@ export function InputActions({
   canRun,
   onRun,
   onClear,
+  isRunning = false,
+  runningLabel,
 }: InputActionsProps) {
   return (
     <>
@@ -27,6 +31,8 @@ export function InputActions({
         colorPalette="accent"
         onClick={onRun}
         disabled={!canRun}
+        loading={isRunning}
+        loadingText={runningLabel}
       >
         <Play aria-hidden="true" />
         {runLabel}

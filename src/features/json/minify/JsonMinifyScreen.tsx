@@ -14,7 +14,7 @@ export function JsonMinifyScreen() {
         formatter={formatter}
         runLabel="Minify"
         outputLabel="Minified JSON output"
-        processingLabel="Minifying…"
+        runningLabel="Minifying…"
       />
     </Stack>
   );

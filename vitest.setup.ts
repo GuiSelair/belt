@@ -1,6 +1,11 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
-import { afterEach } from 'vitest';
+import { afterEach, vi } from 'vitest';
+
+vi.mock('@/tasks/createTaskWorker', async () => {
+  const { createInMemoryWorker } = await import('@/test/createInMemoryWorker');
+  return { createTaskWorker: createInMemoryWorker };
+});
 
 function createEmptyRectList() {
   const rects: DOMRect[] = [];

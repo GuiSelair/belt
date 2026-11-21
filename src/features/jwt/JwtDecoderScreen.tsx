@@ -37,9 +37,11 @@ export function JwtDecoderScreen() {
     setInput,
     canRun,
     hasRun,
+    isRunning,
     token,
     description,
     decodeError,
+    taskError,
     handleRun,
     handleClear,
   } = useJwtDecoderScreen();
@@ -57,6 +59,8 @@ export function JwtDecoderScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel="Decoding…"
             />
           }
         >
@@ -73,6 +77,11 @@ export function JwtDecoderScreen() {
           {!hasRun && (
             <StatusMessage tone="info" title="Ready to decode">
               Paste a JWT on the left and click Decode.
+            </StatusMessage>
+          )}
+          {taskError && (
+            <StatusMessage tone="error" title="Decoding failed">
+              {taskError}
             </StatusMessage>
           )}
           {decodeError && (
