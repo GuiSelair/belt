@@ -9,12 +9,9 @@ import type {
 import type { SelectOption } from '@/components/form/SelectField';
 import { useLastValue } from '@/lib/useLastValue';
 import { useLatestTask } from '@/lib/useLatestTask';
-import {
-  useWorkerTask,
-  type WorkerTaskOptions,
-} from '@/lib/worker/useWorkerTask';
+import { createTask } from '@/tasks/createTask';
 
-import type { FormatJsxRequest, FormatJsxResult } from './lib/formatJsx';
+import type { FormatJsxRequest } from './lib/formatJsx';
 import {
   defaultJsxFormatOptions,
   type JsxBooleanOption,
@@ -51,17 +48,7 @@ export const booleanOptions: { key: JsxBooleanOption; label: string }[] = [
   { key: 'bracketSameLine', label: 'Bracket same line' },
 ];
 
-const FORMAT_TIMEOUT_MS = 5000;
-
-function createFormatWorker() {
-  return new Worker(new URL('./workers/formatJsx.worker.ts', import.meta.url), {
-    type: 'module',
-  });
-}
-
-const workerOptions: WorkerTaskOptions<FormatJsxRequest, FormatJsxResult> = {
-  timeoutMs: FORMAT_TIMEOUT_MS,
-};
+const formatJsxTask = createTask('formatJsx');
 
 export function useJsxBeautifyScreen() {
   const [input, setInput] = useState(JSX_SAMPLE);
@@ -70,8 +57,7 @@ export function useJsxBeautifyScreen() {
   const inputEditorRef = useRef<CodeEditorHandle>(null);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
-  const runFormat = useWorkerTask(createFormatWorker, workerOptions);
-  const { outcome, isPending } = useLatestTask(runFormat, request);
+  const { outcome, isPending } = useLatestTask(formatJsxTask, request);
   if (outcome && !hasLoadedOnce) setHasLoadedOnce(true);
 
   const result = outcome?.ok ? outcome.result : null;
@@ -137,11 +123,8 @@ export function useJsxBeautifyScreen() {
     output,
     canRun: input.trim() !== '',
     isStale: syntaxError !== null && output !== '',
-    processingLabel: isPending
-      ? hasLoadedOnce
-        ? 'Formatting…'
-        : 'Loading Prettier…'
-      : null,
+    isRunning: isPending,
+    runningLabel: hasLoadedOnce ? 'Formatting…' : 'Loading Prettier…',
     syntaxError,
     taskError,
     diagnostics,

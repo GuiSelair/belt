@@ -4,7 +4,6 @@ import { CodeEditor } from '@/components/editor/CodeEditor';
 import { CopyButton } from '@/components/tool/CopyButton';
 import { EditorPanel } from '@/components/tool/EditorPanel';
 import { InputActions } from '@/components/tool/InputActions';
-import { ProcessingIndicator } from '@/components/tool/ProcessingIndicator';
 import { StatusMessage } from '@/components/tool/StatusMessage';
 import { SyntaxErrorAlert } from '@/components/tool/SyntaxErrorAlert';
 import { ToolPanels } from '@/components/tool/ToolPanels';
@@ -15,14 +14,14 @@ interface JsonFormatterViewProps {
   formatter: JsonFormatter;
   runLabel: string;
   outputLabel: string;
-  processingLabel: string;
+  runningLabel: string;
 }
 
 export function JsonFormatterView({
   formatter,
   runLabel,
   outputLabel,
-  processingLabel,
+  runningLabel,
 }: JsonFormatterViewProps) {
   const {
     input,
@@ -30,7 +29,7 @@ export function JsonFormatterView({
     output,
     canRun,
     isStale,
-    isProcessingInWorker,
+    isRunning,
     syntaxError,
     taskError,
     diagnostics,
@@ -64,6 +63,8 @@ export function JsonFormatterView({
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel={runningLabel}
             />
           }
         >
@@ -80,14 +81,7 @@ export function JsonFormatterView({
         <EditorPanel
           title="Output"
           isStale={isStale}
-          actions={
-            <>
-              {isProcessingInWorker && (
-                <ProcessingIndicator label={processingLabel} />
-              )}
-              <CopyButton value={output} />
-            </>
-          }
+          actions={<CopyButton value={output} />}
         >
           <CodeEditor
             label={outputLabel}

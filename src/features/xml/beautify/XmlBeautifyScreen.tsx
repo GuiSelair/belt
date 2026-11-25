@@ -27,7 +27,9 @@ export function XmlBeautifyScreen() {
     notices,
     canRun,
     isStale,
+    isRunning,
     syntaxError,
+    taskError,
     handleRun,
     handleGoToError,
     handleClear,
@@ -51,6 +53,11 @@ export function XmlBeautifyScreen() {
           onGoToError={handleGoToError}
         />
       )}
+      {taskError && (
+        <StatusMessage tone="error" title="Formatting failed">
+          {taskError}
+        </StatusMessage>
+      )}
       {notices.map((notice) => (
         <StatusMessage key={notice} tone="warning" title="Heads up">
           {notice}
@@ -66,6 +73,8 @@ export function XmlBeautifyScreen() {
               canRun={canRun}
               onRun={handleRun}
               onClear={handleClear}
+              isRunning={isRunning}
+              runningLabel="Formatting…"
             />
           }
         >

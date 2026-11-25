@@ -5,17 +5,15 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import { toIndentUnit, type IndentOption } from '@/lib/indentation';
 import { useLastValue } from '@/lib/useLastValue';
+import { useLatestTask } from '@/lib/useLatestTask';
+import { createTask } from '@/tasks/createTask';
 
-import { beautifyXml, type BeautifyXmlResult } from '../lib/beautifyXml';
-import { validateXml } from '../lib/validateXml';
+import type { BeautifyXmlRequest } from '../lib/beautifyXmlDocument';
 import { XML_SAMPLE, toXmlDiagnostic } from '../xmlShared';
 
-interface BeautifyXmlRequest {
-  text: string;
-  indent: string;
-}
+const beautifyXmlTask = createTask('beautifyXml');
 
-const EMPTY_RESULT: BeautifyXmlResult = { output: '', notices: [] };
+const NO_NOTICES: string[] = [];
 
 export function useXmlBeautifyScreen() {
   const [input, setInput] = useState(XML_SAMPLE);
@@ -23,18 +21,15 @@ export function useXmlBeautifyScreen() {
   const [request, setRequest] = useState<BeautifyXmlRequest | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const validation = useMemo(
-    () => (request === null ? null : validateXml(request.text)),
-    [request],
-  );
-  const syntaxError = validation && !validation.ok ? validation.error : null;
+  const { outcome, isPending } = useLatestTask(beautifyXmlTask, request);
 
-  const freshResult = useMemo(() => {
-    if (request === null) return EMPTY_RESULT;
-    if (!validation?.ok) return undefined;
-    return beautifyXml(request.text, request.indent);
-  }, [request, validation]);
-  const result = useLastValue(freshResult, EMPTY_RESULT);
+  const result = outcome?.ok ? outcome.result : null;
+  const taskError = outcome && !outcome.ok ? outcome.error : null;
+  const syntaxError = result && !result.ok ? result.error : null;
+  const freshOutput =
+    request === null ? '' : result?.ok ? result.output : undefined;
+  const output = useLastValue(freshOutput, '');
+  const notices = result?.ok ? result.notices : NO_NOTICES;
 
   const diagnostics = useMemo(
     () => (syntaxError ? [toXmlDiagnostic(syntaxError)] : []),
@@ -59,11 +54,13 @@ export function useXmlBeautifyScreen() {
     setIndent,
     inputEditorRef,
     diagnostics,
-    output: result.output,
-    notices: result.notices,
+    output,
+    notices,
     canRun: input.trim() !== '',
-    isStale: syntaxError !== null && result.output !== '',
+    isStale: syntaxError !== null && output !== '',
+    isRunning: isPending,
     syntaxError,
+    taskError,
     handleRun,
     handleGoToError,
     handleClear,

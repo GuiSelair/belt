@@ -6,32 +6,13 @@ import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
 import type { SelectOption } from '@/components/form/SelectField';
 import { toXmlDiagnostic } from '@/features/xml/xmlShared';
 import { useLatestTask } from '@/lib/useLatestTask';
-import {
-  useWorkerTask,
-  type WorkerTaskOptions,
-} from '@/lib/worker/useWorkerTask';
+import { createTask } from '@/tasks/createTask';
 
-import { inspectWsdl, type InspectWsdlResult } from './lib/inspectWsdl';
 import { WSDL_SAMPLE } from './wsdlShared';
 
-const INLINE_LIMIT_CHARACTERS = 200_000;
+const inspectWsdlTask = createTask('inspectWsdl');
+
 const NO_NOTICES: string[] = [];
-
-function createInspectWorker() {
-  return new Worker(
-    new URL('./workers/inspectWsdl.worker.ts', import.meta.url),
-    {
-      type: 'module',
-    },
-  );
-}
-
-const workerOptions: WorkerTaskOptions<string, InspectWsdlResult> = {
-  inline: {
-    when: (text) => text.length < INLINE_LIMIT_CHARACTERS,
-    run: inspectWsdl,
-  },
-};
 
 export function useWsdlInspectorScreen() {
   const [input, setInput] = useState(WSDL_SAMPLE);
@@ -40,8 +21,7 @@ export function useWsdlInspectorScreen() {
   const [selectedOperation, setSelectedOperation] = useState('');
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const runInspect = useWorkerTask(createInspectWorker, workerOptions);
-  const { outcome, isPending } = useLatestTask(runInspect, request);
+  const { outcome, isPending } = useLatestTask(inspectWsdlTask, request);
 
   const result = outcome?.ok ? outcome.result : null;
   const taskError = outcome && !outcome.ok ? outcome.error : null;
@@ -97,7 +77,7 @@ export function useWsdlInspectorScreen() {
     diagnostics,
     canRun: input.trim() !== '',
     hasRun: request !== null,
-    isInspecting: isPending,
+    isRunning: isPending,
     syntaxError,
     wsdlError,
     taskError,

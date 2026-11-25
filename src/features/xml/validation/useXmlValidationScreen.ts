@@ -3,31 +3,34 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import type { CodeEditorHandle } from '@/components/editor/CodeEditor';
+import { useLatestTask } from '@/lib/useLatestTask';
+import { createTask } from '@/tasks/createTask';
 
-import { validateXml } from '../lib/validateXml';
 import { XML_SAMPLE, toXmlDiagnostic } from '../xmlShared';
+
+const validateXmlTask = createTask('validateXml');
 
 export function useXmlValidationScreen() {
   const [input, setInput] = useState(XML_SAMPLE);
-  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [request, setRequest] = useState<string | null>(null);
   const inputEditorRef = useRef<CodeEditorHandle>(null);
 
-  const validation = useMemo(
-    () => (submitted === null ? null : validateXml(submitted)),
-    [submitted],
-  );
-  const syntaxError = validation && !validation.ok ? validation.error : null;
-  const summary = validation?.ok ? validation.summary : null;
+  const { outcome, isPending } = useLatestTask(validateXmlTask, request);
+
+  const result = outcome?.ok ? outcome.result : null;
+  const taskError = outcome && !outcome.ok ? outcome.error : null;
+  const syntaxError = result && !result.ok ? result.error : null;
+  const summary = result?.ok ? result.summary : null;
 
   const diagnostics = useMemo(
     () => (syntaxError ? [toXmlDiagnostic(syntaxError)] : []),
     [syntaxError],
   );
 
-  const handleRun = useCallback(() => setSubmitted(input), [input]);
+  const handleRun = useCallback(() => setRequest(input), [input]);
   const handleClear = useCallback(() => {
     setInput('');
-    setSubmitted(null);
+    setRequest(null);
   }, []);
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
@@ -39,9 +42,11 @@ export function useXmlValidationScreen() {
     inputEditorRef,
     diagnostics,
     canRun: input.trim() !== '',
-    hasRun: submitted !== null,
+    hasRun: request !== null,
+    isRunning: isPending,
     summary,
     syntaxError,
+    taskError,
     handleRun,
     handleGoToError,
     handleClear,

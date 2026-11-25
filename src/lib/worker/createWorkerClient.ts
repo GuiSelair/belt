@@ -1,29 +1,30 @@
 import type { WorkerRequest, WorkerResponse } from './protocol';
 
-interface WorkerClientOptions {
+interface RunOptions {
   timeoutMs?: number;
 }
 
-interface PendingRequest<Result> {
-  resolve(result: Result): void;
+interface PendingRequest {
+  resolve(result: unknown): void;
   reject(error: Error): void;
   timer: ReturnType<typeof setTimeout>;
 }
 
-export interface WorkerClient<Payload, Result> {
-  run(payload: Payload): Promise<Result>;
+export interface WorkerClient {
+  run(task: string, payload: unknown, options?: RunOptions): Promise<unknown>;
   dispose(): void;
 }
 
-const DEFAULT_TIMEOUT_MS = 5000;
+export const DEFAULT_TIMEOUT_MS = 5000;
 
-export function createWorkerClient<Payload, Result>(
-  createWorker: () => Worker,
-  { timeoutMs = DEFAULT_TIMEOUT_MS }: WorkerClientOptions = {},
-): WorkerClient<Payload, Result> {
+/**
+ * Sends named tasks to a lazily created worker. A timeout or crash terminates
+ * the worker, rejects every pending task, and the next task starts a new one.
+ */
+export function createWorkerClient(createWorker: () => Worker): WorkerClient {
   let worker: Worker | null = null;
   let nextId = 0;
-  const pending = new Map<number, PendingRequest<Result>>();
+  const pending = new Map<number, PendingRequest>();
 
   function settle(id: number) {
     const request = pending.get(id);
@@ -39,7 +40,7 @@ export function createWorkerClient<Payload, Result>(
     for (const id of [...pending.keys()]) settle(id)?.reject(error);
   }
 
-  function handleMessage(event: MessageEvent<WorkerResponse<Result>>) {
+  function handleMessage(event: MessageEvent<WorkerResponse>) {
     const response = event.data;
     const request = settle(response.id);
     if (!request) return;
@@ -60,9 +61,13 @@ export function createWorkerClient<Payload, Result>(
     return worker;
   }
 
-  function run(payload: Payload) {
+  function run(
+    task: string,
+    payload: unknown,
+    { timeoutMs = DEFAULT_TIMEOUT_MS }: RunOptions = {},
+  ) {
     const id = ++nextId;
-    return new Promise<Result>((resolve, reject) => {
+    return new Promise<unknown>((resolve, reject) => {
       const timer = setTimeout(() => {
         reset(
           new Error(
@@ -71,7 +76,7 @@ export function createWorkerClient<Payload, Result>(
         );
       }, timeoutMs);
       pending.set(id, { resolve, reject, timer });
-      const request: WorkerRequest<Payload> = { id, payload };
+      const request: WorkerRequest = { id, task, payload };
       getWorker().postMessage(request);
     });
   }
