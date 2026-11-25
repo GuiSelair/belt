@@ -34,6 +34,60 @@ Next.js 16 (App Router, static export), React 19, TypeScript, Chakra UI 3,
 CodeMirror 6, um único Web Worker que executa o processamento de todas as
 ferramentas (inclusive o parser de SQL em WASM), Vitest + Testing Library.
 
+## Arquitetura de processamento
+
+Toda ferramenta que processa algo ao clicar segue o mesmo caminho: a tela só
+guarda a requisição e renderiza o resultado, e a lógica pura roda em um único
+Web Worker, fora da main thread.
+
+```mermaid
+flowchart TD
+  subgraph main["Main thread"]
+    A["Usuário clica no botão de ação"] --> B["Hook da tela: setRequest(input)"]
+    B --> C["useLatestTask(task, request)<br/>isPending = true"]
+    C --> D["InputActions: botão em loading<br/>e desabilitado"]
+    C --> E["createTask: runTask(payload)"]
+    E --> F["taskClient (createWorkerClient)<br/>id + timeout, cria o worker sob demanda"]
+    M["Resposta chega ao taskClient"] --> N{"ok?"}
+    N -->|"sim"| O["resolve(result)"]
+    N -->|"não"| P["reject(error)"]
+    O --> Q["useLatestTask guarda só o resultado<br/>da requisição mais recente"]
+    P --> Q
+    Q --> R["isPending = false<br/>tela renderiza resultado ou erro"]
+    T["Timeout ou crash"] --> U["Worker encerrado, tarefas pendentes<br/>rejeitadas, próximo pedido recria"]
+  end
+
+  subgraph worker["Web Worker (tasks.worker.ts)"]
+    G["exposeWorkerHandler: onmessage"] --> H["createTaskDispatcher"]
+    H --> I{"Tarefa existe em taskLoaders?"}
+    I -->|"não"| L["{ ok: false, error }"]
+    I -->|"sim"| J["import() dinâmico do módulo da tarefa<br/>(carregado uma vez, inclusive WASM)"]
+    J --> K["Função pura em features/*/lib"]
+    K -->|"sucesso"| S["{ ok: true, result }"]
+    K -->|"exceção"| L
+  end
+
+  F -->|"postMessage { id, task, payload }"| G
+  S -->|"postMessage"| M
+  L -->|"postMessage"| M
+  F -.-> T
+```
+
+| Peça                                     | Responsabilidade                                        |
+| ---------------------------------------- | ------------------------------------------------------- |
+| Hook da tela (`features/*/use*Screen`)   | Guarda o input, dispara a tarefa e expõe `isRunning`    |
+| `src/lib/useLatestTask.ts`               | Estado de pendência e descarte de resultados antigos    |
+| `src/tasks/createTask.ts`                | Função tipada por tarefa sobre o client único           |
+| `src/lib/worker/createWorkerClient.ts`   | Correlação por `id`, timeout e recriação do worker      |
+| `src/tasks/tasks.worker.ts`              | Ponto de entrada do worker                              |
+| `src/lib/worker/createTaskDispatcher.ts` | Resolve a tarefa, executa e devolve sucesso ou erro     |
+| `src/tasks/taskLoaders.ts`               | Tabela de tarefas (`TaskMap`) com `import()` por tarefa |
+| `features/*/lib`                         | Lógica pura, sem React, testável fora do navegador      |
+
+As telas de SQL também pedem ao worker, ao abrir, para pré-carregar o parser em
+WASM (`warmSqlParser`). Esse pedido roda em segundo plano, sem loading no botão;
+se o usuário clicar antes de ele terminar, o botão mostra "Loading SQL parser…".
+
 ## Rodando localmente
 
 Requer Node.js 24.
