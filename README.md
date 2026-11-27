@@ -8,20 +8,21 @@ enviado para qualquer lugar.
 
 ## Ferramentas
 
-| Grupo           | Ferramenta                | Rota                           |
-| --------------- | ------------------------- | ------------------------------ |
-| Beautify        | JSON Beautify             | `/beautify/json`               |
-| Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`                |
-| Beautify        | XML Beautify              | `/beautify/xml`                |
-| Minify          | JSON Minify               | `/minify/json`                 |
-| Validation      | JSON Validation           | `/validation/json`             |
-| Validation      | XML Validation            | `/validation/xml`              |
-| Validation      | SQL Validation            | `/validation/sql`              |
-| Transformations | XML to XSD                | `/transformations/xml-to-xsd`  |
-| Transformations | SQL Aliases               | `/transformations/sql-aliases` |
-| Helpers         | Connection String Builder | `/helpers/connection-string`   |
-| Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`      |
-| Helpers         | JWT Decoder               | `/helpers/jwt-decoder`         |
+| Grupo           | Ferramenta                | Rota                                   |
+| --------------- | ------------------------- | -------------------------------------- |
+| Beautify        | JSON Beautify             | `/beautify/json`                       |
+| Beautify        | JSX Beautify (Prettier)   | `/beautify/jsx`                        |
+| Beautify        | XML Beautify              | `/beautify/xml`                        |
+| Minify          | JSON Minify               | `/minify/json`                         |
+| Validation      | JSON Validation           | `/validation/json`                     |
+| Validation      | XML Validation            | `/validation/xml`                      |
+| Validation      | SQL Validation            | `/validation/sql`                      |
+| Transformations | XML to XSD                | `/transformations/xml-to-xsd`          |
+| Transformations | JSON to JSON Schema       | `/transformations/json-to-json-schema` |
+| Transformations | SQL Aliases               | `/transformations/sql-aliases`         |
+| Helpers         | Connection String Builder | `/helpers/connection-string`           |
+| Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`              |
+| Helpers         | JWT Decoder               | `/helpers/jwt-decoder`                 |
 
 O header também tem links para [transform.tools](https://transform.tools) e
 [webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e
