@@ -1,8 +1,10 @@
+import { findDialectViolation } from './dialectRules';
 import { sqlDialects, type SqlDialect } from './dialects';
 import { loadSqlParser } from './loadSqlParser';
 import {
   describeStatement,
   parseSql,
+  type ParseSqlResult,
   type SqlParser,
   type SqlSyntaxError,
 } from './parseSql';
@@ -29,15 +31,26 @@ export type ValidateSqlResult =
       compatibility: DialectCompatibility[];
     };
 
+function checkSql(
+  parser: SqlParser,
+  text: string,
+  dialect: SqlDialect,
+): ParseSqlResult {
+  const result = parseSql(parser, text, dialect);
+  if (!result.ok) return result;
+  const violation = findDialectViolation(result.statements, text, dialect);
+  return violation ? { ok: false, error: violation } : result;
+}
+
 export function validateSqlWith(
   parser: SqlParser,
   { text, dialect }: ValidateSqlRequest,
 ): ValidateSqlResult {
   const compatibility = sqlDialects.map(({ id }) => ({
     dialect: id,
-    ok: parseSql(parser, text, id).ok,
+    ok: checkSql(parser, text, id).ok,
   }));
-  const result = parseSql(parser, text, dialect);
+  const result = checkSql(parser, text, dialect);
   if (!result.ok) return { ok: false, error: result.error, compatibility };
   return {
     ok: true,
