@@ -8,7 +8,7 @@ export const tools: readonly ToolDefinition[] = [
       'Format JSON with your preferred indentation, without losing big-number precision.',
     groupId: 'beautify',
     href: '/beautify/json',
-    relatedToolIds: ['json-minify', 'json-validation'],
+    relatedToolIds: ['json-minify', 'json-validation', 'json-to-json-schema'],
   },
   {
     id: 'jsx-beautify',
@@ -43,7 +43,7 @@ export const tools: readonly ToolDefinition[] = [
       'Check whether JSON is valid and jump straight to the line and column that breaks it.',
     groupId: 'validation',
     href: '/validation/json',
-    relatedToolIds: ['json-beautify', 'json-minify'],
+    relatedToolIds: ['json-beautify', 'json-minify', 'json-to-json-schema'],
   },
   {
     id: 'xml-validation',
@@ -70,6 +70,15 @@ export const tools: readonly ToolDefinition[] = [
     groupId: 'transformations',
     href: '/transformations/xml-to-xsd',
     relatedToolIds: ['xml-validation', 'xml-beautify'],
+  },
+  {
+    id: 'json-to-json-schema',
+    name: 'JSON to JSON Schema',
+    description:
+      'Generate a JSON Schema from a sample document, with required properties and format inference.',
+    groupId: 'transformations',
+    href: '/transformations/json-to-json-schema',
+    relatedToolIds: ['json-validation', 'json-beautify'],
   },
   {
     id: 'sql-aliases',

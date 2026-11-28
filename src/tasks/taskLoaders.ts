@@ -2,6 +2,10 @@ import type {
   FormatJsonRequest,
   FormatJsonResult,
 } from '@/features/json/lib/formatJson';
+import type {
+  GenerateJsonSchemaRequest,
+  GenerateJsonSchemaResult,
+} from '@/features/json/lib/schema/generateJsonSchema';
 import type { ValidateJsonResult } from '@/features/json/lib/validateJson';
 import type {
   FormatJsxRequest,
@@ -35,6 +39,7 @@ interface Task<Payload, Result> {
 export interface TaskMap {
   formatJson: Task<FormatJsonRequest, FormatJsonResult>;
   validateJson: Task<string, ValidateJsonResult>;
+  generateJsonSchema: Task<GenerateJsonSchemaRequest, GenerateJsonSchemaResult>;
   formatJsx: Task<FormatJsxRequest, FormatJsxResult>;
   beautifyXml: Task<BeautifyXmlRequest, BeautifyXmlDocumentResult>;
   validateXml: Task<string, XmlValidationResult>;
@@ -62,6 +67,10 @@ export const taskLoaders: {
     import('@/features/json/lib/formatJson').then((m) => m.formatJson),
   validateJson: () =>
     import('@/features/json/lib/validateJson').then((m) => m.validateJson),
+  generateJsonSchema: () =>
+    import('@/features/json/lib/schema/generateJsonSchema').then(
+      (m) => m.generateJsonSchema,
+    ),
   formatJsx: () =>
     import('@/features/jsx/lib/formatJsx').then((m) => m.formatJsx),
   beautifyXml: () =>
