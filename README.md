@@ -20,6 +20,7 @@ enviado para qualquer lugar.
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd`          |
 | Transformations | JSON to JSON Schema       | `/transformations/json-to-json-schema` |
 | Transformations | SQL Aliases               | `/transformations/sql-aliases`         |
+| Transformations | Base64                    | `/transformations/base64`              |
 | Helpers         | Connection String Builder | `/helpers/connection-string`           |
 | Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`              |
 | Helpers         | JWT Decoder               | `/helpers/jwt-decoder`                 |

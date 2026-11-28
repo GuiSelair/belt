@@ -42,6 +42,14 @@ describe('tool registry', () => {
     expect(relatedIds('xml-beautify')).toContain('xml-validation');
   });
 
+  it('relates base64 and the jwt decoder', () => {
+    const relatedIds = (id: Parameters<typeof getRelatedTools>[0]) =>
+      getRelatedTools(id).map((tool) => tool.id);
+
+    expect(relatedIds('base64')).toContain('jwt-decoder');
+    expect(relatedIds('jwt-decoder')).toContain('base64');
+  });
+
   it('lists the curated external links', () => {
     expect(externalLinks.map((link) => link.href)).toEqual([
       'https://transform.tools',

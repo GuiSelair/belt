@@ -14,6 +14,7 @@ export type ToolId =
   | 'xml-to-xsd'
   | 'json-to-json-schema'
   | 'sql-aliases'
+  | 'base64'
   | 'connection-string'
   | 'wsdl-inspector'
   | 'jwt-decoder';
