@@ -13,6 +13,7 @@ import { ToolToolbar } from '@/components/tool/ToolToolbar';
 
 import { dialectOptions } from '../sqlShared';
 import { SqlCompatibilityList } from './SqlCompatibilityList';
+import { SqlExamples } from './SqlExamples';
 import { useSqlValidationScreen } from './useSqlValidationScreen';
 
 function describeStatements(statements: string[]) {
@@ -26,7 +27,10 @@ export function SqlValidationScreen() {
     input,
     setInput,
     dialect,
+    dialectLabel,
     handleDialectChange,
+    examples,
+    handleExampleSelect,
     inputEditorRef,
     diagnostics,
     canRun,
@@ -54,6 +58,11 @@ export function SqlValidationScreen() {
         />
       </ToolToolbar>
 
+      <SqlExamples
+        dialectLabel={dialectLabel}
+        examples={examples}
+        onSelect={handleExampleSelect}
+      />
       <ToolPanels>
         <EditorPanel
           title="Input"
@@ -114,8 +123,10 @@ export function SqlValidationScreen() {
               </Stack>
             )}
             <Text color="fg.muted" fontSize="sm">
-              Checks syntax only, against each dialect&apos;s grammar. It does
-              not check whether tables, columns or functions exist.
+              Checks syntax against each dialect&apos;s grammar, plus common
+              dialect-specific rules such as TOP, LIMIT and FETCH. Some
+              incompatibilities may still go unnoticed, and it does not check
+              whether tables, columns or functions exist.
             </Text>
           </Stack>
         </EditorPanel>

@@ -10,6 +10,7 @@ import type { ValidateSqlRequest } from '../lib/validateSql';
 import { SQL_SAMPLE, toSqlDiagnostic } from '../sqlShared';
 import { validateSqlTask } from '../sqlTasks';
 import { useSqlParserWarmUp } from '../useSqlParserWarmUp';
+import { sqlExamples, type SqlExample } from './sqlExamples';
 
 export function useSqlValidationScreen() {
   const [input, setInput] = useState(SQL_SAMPLE);
@@ -45,12 +46,22 @@ export function useSqlValidationScreen() {
   const handleGoToError = useCallback(() => {
     if (syntaxError) inputEditorRef.current?.focusAt(syntaxError.offset);
   }, [syntaxError]);
+  const handleExampleSelect = useCallback(
+    (example: SqlExample) => {
+      setInput(example.sql);
+      setRequest({ text: example.sql, dialect });
+    },
+    [dialect],
+  );
 
   return {
     input,
     setInput,
     dialect,
+    dialectLabel: getSqlDialect(dialect).label,
     handleDialectChange,
+    examples: sqlExamples[dialect],
+    handleExampleSelect,
     inputEditorRef,
     diagnostics,
     canRun: input.trim() !== '',
