@@ -33,6 +33,42 @@ describe('SqlValidationScreen', () => {
     expect(await screen.findByText('Valid MySQL SQL')).toBeInTheDocument();
   });
 
+  it('keeps the examples collapsed until they are requested', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<SqlValidationScreen />);
+    const toggle = screen.getByRole('button', {
+      name: 'PostgreSQL examples',
+    });
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(
+      screen.queryByRole('button', { name: /invalid query example/ }),
+    ).not.toBeInTheDocument();
+
+    await user.click(toggle);
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(
+      screen.getByRole('button', { name: 'Validate the simple query example' }),
+    ).toBeVisible();
+  });
+
+  it('validates the invalid example of the selected dialect', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<SqlValidationScreen />);
+
+    await user.selectOptions(screen.getByLabelText('Dialect'), 'oracle');
+    await user.click(screen.getByRole('button', { name: 'Oracle examples' }));
+    await user.click(
+      screen.getByRole('button', {
+        name: 'Validate the invalid query example',
+      }),
+    );
+
+    expect(await screen.findByText('Invalid Oracle SQL')).toBeInTheDocument();
+    expect(screen.getByText(/LIMIT is not supported/)).toBeInTheDocument();
+  });
+
   it('disables the run button once the input is cleared', async () => {
     const user = userEvent.setup();
     renderWithProviders(<SqlValidationScreen />);

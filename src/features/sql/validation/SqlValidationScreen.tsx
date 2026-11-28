@@ -13,6 +13,7 @@ import { ToolToolbar } from '@/components/tool/ToolToolbar';
 
 import { dialectOptions } from '../sqlShared';
 import { SqlCompatibilityList } from './SqlCompatibilityList';
+import { SqlExamples } from './SqlExamples';
 import { useSqlValidationScreen } from './useSqlValidationScreen';
 
 function describeStatements(statements: string[]) {
@@ -26,7 +27,10 @@ export function SqlValidationScreen() {
     input,
     setInput,
     dialect,
+    dialectLabel,
     handleDialectChange,
+    examples,
+    handleExampleSelect,
     inputEditorRef,
     diagnostics,
     canRun,
@@ -54,6 +58,11 @@ export function SqlValidationScreen() {
         />
       </ToolToolbar>
 
+      <SqlExamples
+        dialectLabel={dialectLabel}
+        examples={examples}
+        onSelect={handleExampleSelect}
+      />
       <ToolPanels>
         <EditorPanel
           title="Input"
