@@ -27,4 +27,27 @@ describe('HomeHero', () => {
       '/transformations/xml-to-xsd',
     );
   });
+
+  it('renders the decorative white-chalk lateral illustrations hidden from assistive tech', () => {
+    const { container } = renderWithProviders(<HomeHero />);
+
+    const swissKnife = container.querySelector(
+      'svg[data-chalk-illustration="swiss-knife"]',
+    );
+    const utilityBelt = container.querySelector(
+      'svg[data-chalk-illustration="utility-belt"]',
+    );
+
+    expect(swissKnife).toBeInTheDocument();
+    expect(swissKnife).toHaveAttribute('aria-hidden', 'true');
+    expect(utilityBelt).toBeInTheDocument();
+    expect(utilityBelt).toHaveAttribute('aria-hidden', 'true');
+
+    const knifeFilterId = swissKnife?.querySelector('filter')?.id;
+    const beltFilterId = utilityBelt?.querySelector('filter')?.id;
+
+    expect(knifeFilterId).toBeTruthy();
+    expect(beltFilterId).toBeTruthy();
+    expect(knifeFilterId).not.toBe(beltFilterId);
+  });
 });
