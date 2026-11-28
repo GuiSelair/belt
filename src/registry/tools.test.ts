@@ -54,6 +54,7 @@ describe('tool registry', () => {
     expect(externalLinks.map((link) => link.href)).toEqual([
       'https://transform.tools',
       'https://webhook.cool/',
+      'https://www.4devs.com.br/',
     ]);
   });
 });

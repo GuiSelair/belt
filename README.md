@@ -25,8 +25,9 @@ enviado para qualquer lugar.
 | Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`              |
 | Helpers         | JWT Decoder               | `/helpers/jwt-decoder`                 |
 
-O header também tem links para [transform.tools](https://transform.tools) e
-[webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e
+O header também tem links para [transform.tools](https://transform.tools),
+[webhook.cool](https://webhook.cool) e
+[4devs.com.br](https://www.4devs.com.br/). Cada ferramenta faz uma única coisa e
 aponta para as ferramentas relacionadas (por exemplo, JSON Validation aponta
 para JSON Beautify).
 
