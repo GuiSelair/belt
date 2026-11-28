@@ -56,6 +56,10 @@ describe('HomeHero', () => {
 
     const utilityBelts = container.querySelectorAll('[data-utility-belt]');
     expect(utilityBelts).toHaveLength(1);
+    expect(utilityBelts[0]).toHaveAttribute(
+      'data-belt-variant',
+      'option-b-full',
+    );
     expect(utilityBelts[0]).toHaveAttribute('aria-hidden', 'true');
     expect(utilityBelts[0]).toHaveAttribute('focusable', 'false');
   });

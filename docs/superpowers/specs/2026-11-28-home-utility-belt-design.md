@@ -16,8 +16,9 @@ leitura do nome do aplicativo.
 ## Direção visual
 
 O cinto passa pelo terço inferior da palavra e acompanha uma curva suave,
-criando a sensação de abraço e tensão escolhida na opção visual B. A faixa deve
-ser fina o suficiente para que todas as letras permaneçam reconhecíveis.
+criando a sensação de abraço e tensão escolhida na opção visual B. A faixa
+mantém a espessura integral da proposta original, sem redução, enquanto todas
+as letras permanecem reconhecíveis.
 
 A composição usa grafite na faixa e nos pequenos bolsos, verde-limão na fivela
 e detalhes coerentes com os acentos atuais da marca. As formas podem remeter a
@@ -36,8 +37,8 @@ compreender a página.
 
 ## Responsividade
 
-O cinto ocupará a largura da palavra e terá espessura proporcionalmente menor
-em telas compactas. Seu posicionamento deve manter a fivela centralizada e
+O cinto ocupará a largura da palavra e manterá as mesmas proporções em telas
+compactas e amplas. Seu posicionamento deve manter a fivela centralizada e
 evitar que os bolsos ultrapassem os limites visuais do título.
 
 ## Testes e critérios de aceite

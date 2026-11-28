@@ -8,54 +8,55 @@ export function UtilityBelt() {
       aria-hidden="true"
       focusable="false"
       data-utility-belt=""
-      viewBox="0 0 400 86"
+      data-belt-variant="option-b-full"
+      viewBox="0 0 400 92"
       position="absolute"
       left="50%"
-      bottom={{ base: '-0.04em', md: '-0.03em' }}
+      bottom="-0.05em"
       transform="translateX(-50%)"
-      width={{ base: '2.08em', md: '2.04em' }}
+      width="2.08em"
       height="auto"
       overflow="visible"
       pointerEvents="none"
       zIndex="1"
     >
       <chakra.path
-        d="M18 26 C106 44 294 44 382 26 L378 43 C290 61 110 61 22 43 Z"
+        d="M16 20 C104 42 296 42 384 20 L380 48 C292 70 108 70 20 48 Z"
         fill="navy.950"
       />
       <chakra.path
-        d="M22 28 C112 43 288 43 378 28"
+        d="M21 25 C111 47 289 47 379 25"
         fill="none"
         stroke="navy.700"
-        strokeWidth="5"
+        strokeWidth="6"
         strokeLinecap="round"
       />
       <chakra.path
-        d="M76 38 L122 43 L118 68 Q97 76 76 66 Z"
+        d="M70 43 L126 50 L121 80 Q97 90 72 77 Z"
         fill="navy.900"
         stroke="brand.green"
-        strokeWidth="4"
+        strokeWidth="5"
         strokeLinejoin="round"
       />
       <chakra.path
-        d="M324 38 L278 43 L282 68 Q303 76 324 66 Z"
+        d="M330 43 L274 50 L279 80 Q303 90 328 77 Z"
         fill="navy.900"
         stroke="brand.green"
-        strokeWidth="4"
+        strokeWidth="5"
         strokeLinejoin="round"
       />
       <chakra.rect
-        x="165"
-        y="34"
-        width="70"
-        height="45"
-        rx="9"
+        x="158"
+        y="38"
+        width="84"
+        height="52"
+        rx="11"
         fill="brand.green"
         stroke="navy.950"
-        strokeWidth="6"
+        strokeWidth="7"
       />
       <chakra.path
-        d="M184 53 L200 43 L216 53 L210 68 H190 Z"
+        d="M181 59 L200 47 L219 59 L212 77 H188 Z"
         fill="brand.blue"
       />
     </chakra.svg>
