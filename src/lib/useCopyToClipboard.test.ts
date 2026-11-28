@@ -13,8 +13,12 @@ describe('useCopyToClipboard', () => {
     vi.stubGlobal('navigator', { clipboard: { writeText } });
     const { result } = renderHook(() => useCopyToClipboard());
 
-    await act(() => result.current.copy('hello'));
+    let copied = false;
+    await act(async () => {
+      copied = await result.current.copy('hello');
+    });
 
+    expect(copied).toBe(true);
     expect(writeText).toHaveBeenCalledWith('hello');
     expect(result.current.status).toBe('copied');
   });
@@ -23,8 +27,12 @@ describe('useCopyToClipboard', () => {
     vi.stubGlobal('navigator', {});
     const { result } = renderHook(() => useCopyToClipboard());
 
-    await act(() => result.current.copy('hello'));
+    let copied = true;
+    await act(async () => {
+      copied = await result.current.copy('hello');
+    });
 
+    expect(copied).toBe(false);
     expect(result.current.status).toBe('error');
   });
 });

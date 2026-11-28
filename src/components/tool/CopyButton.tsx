@@ -3,6 +3,7 @@
 import { Button, VisuallyHidden } from '@chakra-ui/react';
 import { Check, Copy, TriangleAlert } from 'lucide-react';
 
+import { trackToolCopy } from '@/lib/analytics';
 import { useCopyToClipboard, type CopyStatus } from '@/lib/useCopyToClipboard';
 
 interface CopyButtonProps {
@@ -35,8 +36,9 @@ export function CopyButton({
     error: 'Copy failed',
   }[status];
 
-  function handleClick() {
-    void copy(value);
+  async function handleClick() {
+    const copied = await copy(value);
+    if (copied) trackToolCopy(label);
   }
 
   return (

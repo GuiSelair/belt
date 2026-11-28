@@ -14,14 +14,17 @@ export function useCopyToClipboard() {
 
   const copy = useCallback(async (text: string) => {
     clearTimeout(resetTimerRef.current);
+    let copied = false;
     try {
       if (!navigator.clipboard) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(text);
       setStatus('copied');
+      copied = true;
     } catch {
       setStatus('error');
     }
     resetTimerRef.current = setTimeout(() => setStatus('idle'), RESET_AFTER_MS);
+    return copied;
   }, []);
 
   return { copy, status };

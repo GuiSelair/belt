@@ -4,7 +4,8 @@
 
 O canivete suíço do desenvolvedor: uma caixa de ferramentas 100% client-side
 que roda inteiramente no navegador. Nada do que você cola é armazenado ou
-enviado para qualquer lugar.
+enviado para qualquer lugar. A medição de uso, quando ligada no build,
+registra apenas a página e o tipo de ação.
 
 ## Ferramentas
 
@@ -105,6 +106,28 @@ com qualquer servidor de arquivos estáticos:
 npm run build
 npx serve out
 ```
+
+## Medição de uso
+
+Defina o ID de medição da propriedade do Google Analytics 4 (formato
+`G-XXXXXXXX`) na hora do build. Sem essa variável o site não carrega a tag.
+Visitas em `localhost` também não são enviadas.
+
+```bash
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
+```
+
+Cada navegação gera um `page_view` com o título da ferramenta e o grupo
+(Beautify, Validation, Helpers e os demais). O clique no botão principal gera
+`tool_run` (`action` é o rótulo, como Validate ou Beautify), uma cópia
+bem-sucedida gera `tool_copy` (`target` é o rótulo do botão) e um link
+externo do menu gera `outbound_click` (`link_id`). Nenhum evento inclui o
+texto colado, tokens, URIs ou mensagens de erro.
+
+No GA4, crie dimensões personalizadas de evento para `tool_id`, `action`,
+`target` e `link_id`. Em Enhanced measurement, desative "Page changes based
+on browser history events" para a navegação entre ferramentas não contar duas
+vezes.
 
 ## Scripts
 

@@ -1,10 +1,18 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Unbounded } from 'next/font/google';
+import Script from 'next/script';
 import { Box, Flex, SkipNavContent, SkipNavLink } from '@chakra-ui/react';
 
+import { AnalyticsRouteListener } from '@/components/analytics/AnalyticsRouteListener';
 import { AppFooter } from '@/components/navigation/AppFooter';
 import { AppHeader } from '@/components/navigation/AppHeader';
 import { AppProviders } from '@/components/providers/AppProviders';
+import { siteConfig } from '@/config/site';
+import {
+  getMeasurementId,
+  googleAnalyticsInitSnippet,
+  googleAnalyticsScriptSrc,
+} from '@/lib/analytics';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,14 +32,15 @@ const brandFont = Unbounded({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Belt — the Swiss army knife for developers',
-    template: '%s · Belt',
+    default: siteConfig.title,
+    template: `%s${siteConfig.titleSuffix}`,
   },
-  description:
-    'Beautify, validate and transform data right in your browser. 100% client-side: nothing you paste leaves your machine.',
+  description: siteConfig.description,
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
+  const measurementId = getMeasurementId();
+
   return (
     <html
       lang="en"
@@ -51,6 +60,19 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             <AppFooter />
           </Flex>
         </AppProviders>
+        {measurementId && (
+          <>
+            <Script id="google-analytics-init" strategy="beforeInteractive">
+              {googleAnalyticsInitSnippet(measurementId)}
+            </Script>
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              src={googleAnalyticsScriptSrc(measurementId)}
+            />
+            <AnalyticsRouteListener />
+          </>
+        )}
       </body>
     </html>
   );

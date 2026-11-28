@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { externalLinks } from './externalLinks';
-import { getRelatedTools, getTool, tools } from './tools';
+import { getRelatedTools, getTool, getToolByHref, tools } from './tools';
 
 describe('tool registry', () => {
   it('has unique ids and routes', () => {
@@ -21,6 +21,11 @@ describe('tool registry', () => {
   it('resolves featured tools by id', () => {
     expect(getTool('json-beautify').href).toBe('/beautify/json');
     expect(getTool('xml-to-xsd').href).toBe('/transformations/xml-to-xsd');
+  });
+
+  it('resolves a tool from its route', () => {
+    expect(getToolByHref('/helpers/jwt-decoder')?.id).toBe('jwt-decoder');
+    expect(getToolByHref('/missing')).toBeUndefined();
   });
 
   it('relates tools only to other registered tools', () => {
