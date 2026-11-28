@@ -130,6 +130,10 @@ export function getTool(id: ToolId): ToolDefinition {
   return tool;
 }
 
+export function getToolByHref(href: string): ToolDefinition | undefined {
+  return tools.find((tool) => tool.href === href);
+}
+
 export function getToolsByGroup(groupId: ToolGroupId): ToolDefinition[] {
   return tools.filter((tool) => tool.groupId === groupId);
 }

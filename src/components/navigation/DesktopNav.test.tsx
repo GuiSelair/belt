@@ -2,8 +2,13 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
+import { trackOutboundClick } from '@/lib/analytics';
 import type { NavSection } from '@/registry';
 import { renderWithProviders } from '@/test/renderWithProviders';
+
+vi.mock('@/lib/analytics', () => ({
+  trackOutboundClick: vi.fn(),
+}));
 
 import { DesktopNav } from './DesktopNav';
 
@@ -110,5 +115,8 @@ describe('DesktopNav', () => {
 
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+
+    await user.click(link);
+    expect(trackOutboundClick).toHaveBeenCalledWith('transform-tools');
   });
 });

@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import { Box, Link, VisuallyHidden } from '@chakra-ui/react';
 import { ExternalLink } from 'lucide-react';
 
+import { trackOutboundClick } from '@/lib/analytics';
 import type { NavItem } from '@/registry';
 
 interface NavLinkItemProps {
@@ -46,12 +47,17 @@ function NavLinkContent({ item }: Pick<NavLinkItemProps, 'item'>) {
 }
 
 export function NavLinkItem({ item, isActive }: NavLinkItemProps) {
+  function handleOutboundClick() {
+    trackOutboundClick(item.id);
+  }
+
   if (item.external) {
     return (
       <Link
         href={item.href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleOutboundClick}
         {...linkStyles}
       >
         <NavLinkContent item={item} />

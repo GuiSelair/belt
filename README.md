@@ -4,7 +4,8 @@
 
 O canivete suíço do desenvolvedor: uma caixa de ferramentas 100% client-side
 que roda inteiramente no navegador. Nada do que você cola é armazenado ou
-enviado para qualquer lugar.
+enviado para qualquer lugar. A medição de uso, quando ligada no build,
+registra apenas a página e o tipo de ação.
 
 ## Ferramentas
 
