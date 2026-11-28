@@ -15,6 +15,8 @@ import { getTool } from '@/registry';
 import { CurvedArrow } from './CurvedArrow';
 import { ScribbleCircle } from './ScribbleCircle';
 import { SparkLines } from './SparkLines';
+import { SwissKnifeChalk } from './SwissKnifeChalk';
+import { UtilityBeltChalk } from './UtilityBeltChalk';
 
 export function HomeHero() {
   const jsonBeautify = getTool('json-beautify');
@@ -25,12 +27,16 @@ export function HomeHero() {
       as="section"
       aria-labelledby="home-title"
       data-home-hero=""
+      position="relative"
+      overflow="hidden"
       display="grid"
       placeItems="center"
       flex="1"
       py="16"
     >
-      <Container maxW="4xl" textAlign="center">
+      <SwissKnifeChalk />
+      <UtilityBeltChalk />
+      <Container maxW="4xl" textAlign="center" position="relative" zIndex="1">
         <Stack gap="8" align="center">
           <Heading
             as="h1"
