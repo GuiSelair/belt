@@ -17,6 +17,7 @@ import { ScribbleCircle } from './ScribbleCircle';
 import { SparkLines } from './SparkLines';
 import { SwissKnifeChalk } from './SwissKnifeChalk';
 import { UtilityBeltChalk } from './UtilityBeltChalk';
+import { UtilityBelt } from './UtilityBelt';
 
 export function HomeHero() {
   const jsonBeautify = getTool('json-beautify');
@@ -51,6 +52,7 @@ export function HomeHero() {
           >
             <SparkLines placement="topStart" />
             Belt
+            <UtilityBelt />
             <SparkLines placement="bottomEnd" delay={1.2} />
           </Heading>
           <Text fontSize={{ base: 'lg', md: '2xl' }} color="fg" maxW="2xl">

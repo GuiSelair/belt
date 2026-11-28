@@ -50,4 +50,13 @@ describe('HomeHero', () => {
     expect(beltFilterId).toBeTruthy();
     expect(knifeFilterId).not.toBe(beltFilterId);
   });
+
+  it('renders the home utility belt as a decorative graphic', () => {
+    const { container } = renderWithProviders(<HomeHero />);
+
+    const utilityBelts = container.querySelectorAll('[data-utility-belt]');
+    expect(utilityBelts).toHaveLength(1);
+    expect(utilityBelts[0]).toHaveAttribute('aria-hidden', 'true');
+    expect(utilityBelts[0]).toHaveAttribute('focusable', 'false');
+  });
 });
