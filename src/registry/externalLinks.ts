@@ -11,4 +11,9 @@ export const externalLinks: readonly ExternalLink[] = [
     name: 'webhook.cool',
     href: 'https://webhook.cool/',
   },
+  {
+    id: '4devs',
+    name: '4devs.com.br',
+    href: 'https://www.4devs.com.br/',
+  },
 ];

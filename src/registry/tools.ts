@@ -89,6 +89,14 @@ export const tools: readonly ToolDefinition[] = [
     href: '/transformations/sql-aliases',
   },
   {
+    id: 'base64',
+    name: 'Base64',
+    description: 'Encode text to Base64 or decode Base64 back to UTF-8 text.',
+    groupId: 'transformations',
+    href: '/transformations/base64',
+    relatedToolIds: ['jwt-decoder'],
+  },
+  {
     id: 'connection-string',
     name: 'Connection String Builder',
     description:
@@ -112,6 +120,7 @@ export const tools: readonly ToolDefinition[] = [
       'Read the header and claims of a JWT, with readable dates and expiry status.',
     groupId: 'helpers',
     href: '/helpers/jwt-decoder',
+    relatedToolIds: ['base64'],
   },
 ];
 

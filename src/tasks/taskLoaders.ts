@@ -1,4 +1,8 @@
 import type {
+  ConvertBase64Request,
+  ConvertBase64Result,
+} from '@/features/base64/lib/convertBase64';
+import type {
   FormatJsonRequest,
   FormatJsonResult,
 } from '@/features/json/lib/formatJson';
@@ -49,6 +53,7 @@ export interface TaskMap {
   validateSql: Task<ValidateSqlRequest, ValidateSqlResult>;
   addAliases: Task<AddAliasesRequest, AddAliasesResult>;
   inspectJwt: Task<string, InspectJwtResult>;
+  convertBase64: Task<ConvertBase64Request, ConvertBase64Result>;
 }
 
 export type TaskName = keyof TaskMap;
@@ -91,4 +96,6 @@ export const taskLoaders: {
     import('@/features/sql/aliases/lib/addAliases').then((m) => m.addAliases),
   inspectJwt: () =>
     import('@/features/jwt/lib/inspectJwt').then((m) => m.inspectJwt),
+  convertBase64: () =>
+    import('@/features/base64/lib/convertBase64').then((m) => m.convertBase64),
 };

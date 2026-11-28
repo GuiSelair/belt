@@ -20,12 +20,14 @@ enviado para qualquer lugar.
 | Transformations | XML to XSD                | `/transformations/xml-to-xsd`          |
 | Transformations | JSON to JSON Schema       | `/transformations/json-to-json-schema` |
 | Transformations | SQL Aliases               | `/transformations/sql-aliases`         |
+| Transformations | Base64                    | `/transformations/base64`              |
 | Helpers         | Connection String Builder | `/helpers/connection-string`           |
 | Helpers         | WSDL Inspector            | `/helpers/wsdl-inspector`              |
 | Helpers         | JWT Decoder               | `/helpers/jwt-decoder`                 |
 
-O header também tem links para [transform.tools](https://transform.tools) e
-[webhook.cool](https://webhook.cool). Cada ferramenta faz uma única coisa e
+O header também tem links para [transform.tools](https://transform.tools),
+[webhook.cool](https://webhook.cool) e
+[4devs.com.br](https://www.4devs.com.br/). Cada ferramenta faz uma única coisa e
 aponta para as ferramentas relacionadas (por exemplo, JSON Validation aponta
 para JSON Beautify).
 
